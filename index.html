@@ -231,6 +231,9 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 </div>
 
 <div id="toast"></div>
+<div id="storage-warn" style="display:none;position:fixed;top:0;left:0;right:0;background:#8a4000;color:#fff;font-size:.82rem;padding:10px 16px;text-align:center;z-index:1000;line-height:1.4">
+  ⚠️ Your browser blocked data saving. Plants won't persist after closing — try opening in Chrome or hosting online.
+</div>
 
 <script>
 // ── Plant database (inlined) ──────────────────────────────────────────────
@@ -239,15 +242,21 @@ const PLANTS_DB = [{"common_name":"Radermachera (China Doll)","scientific_name":
 // ── Storage ───────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'plant-tracker-data';
 let plants = [];
+let _storageOk = true;
 
 function load() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     plants = raw ? JSON.parse(raw) : [];
-  } catch(e) { plants = []; }
+  } catch(e) { _storageOk = false; plants = []; }
 }
 function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+    _storageOk = true;
+  } catch(e) {
+    _storageOk = false;
+  }
 }
 function genId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -478,6 +487,7 @@ function addPlant() {
   };
   plants.push(plant);
   save();
+  if (!_storageOk) document.getElementById('storage-warn').style.display = '';
   toast(name + ' added!');
   resetAddForm();
   showTab('dashboard');
@@ -560,6 +570,7 @@ function esc(s) {
 
 // ── Init ──────────────────────────────────────────────────────────────────
 load();
+if (!_storageOk) document.getElementById('storage-warn').style.display = '';
 renderDashboard();
 </script>
 </body>
