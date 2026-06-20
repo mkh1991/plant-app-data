@@ -230,6 +230,7 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
   </div>
 </div>
 
+<div id="js-check" style="background:#c0392b;color:#fff;padding:12px 16px;text-align:center;font-weight:600">⚠️ JavaScript is not running — try a different browser</div>
 <div id="toast"></div>
 <div id="storage-warn" style="display:none;position:fixed;top:0;left:0;right:0;background:#8a4000;color:#fff;font-size:.82rem;padding:10px 16px;text-align:center;z-index:1000;line-height:1.4">
   ⚠️ Your browser blocked data saving. Plants won't persist after closing — try opening in Chrome or hosting online.
@@ -582,6 +583,7 @@ function esc(s) {
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
+document.getElementById('js-check').style.display = 'none';
 load();
 if (!_storageOk) document.getElementById('storage-warn').style.display = '';
 renderDashboard();
