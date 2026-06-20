@@ -469,6 +469,7 @@ function deletePlant(id) {
 let _matchedDbEntry = null;
 
 function addPlant() {
+  try {
   const name = document.getElementById('inp-name').value.trim();
   if (!name) { toast('Please enter a plant name'); return; }
   const species = document.getElementById('inp-species').value.trim();
@@ -491,6 +492,7 @@ function addPlant() {
   toast(name + ' added!');
   resetAddForm();
   showTab('dashboard');
+  } catch(err) { toast('Error: ' + err.message); }
 }
 
 function resetAddForm() {
@@ -507,6 +509,7 @@ function resetAddForm() {
 // ── Species autocomplete ──────────────────────────────────────────────────
 const speciesInput = document.getElementById('inp-species');
 const speciesResults = document.getElementById('species-results');
+let _currentHits = [];
 
 function normalise(s) {
   return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -516,13 +519,13 @@ speciesInput.addEventListener('input', function() {
   const q = this.value.trim();
   if (q.length < 2) { speciesResults.style.display = 'none'; return; }
   const qn = normalise(q);
-  const hits = PLANTS_DB.filter(p =>
+  _currentHits = PLANTS_DB.filter(p =>
     normalise(p.common_name).includes(qn) ||
     normalise(p.scientific_name).includes(qn)
   ).slice(0, 8);
-  if (!hits.length) { speciesResults.style.display = 'none'; return; }
-  speciesResults.innerHTML = hits.map((p, i) =>
-    `<div class="species-item" data-idx="${i}" onclick="selectSpecies(${JSON.stringify(p).replace(/</g,'&lt;')})">
+  if (!_currentHits.length) { speciesResults.style.display = 'none'; return; }
+  speciesResults.innerHTML = _currentHits.map((p, i) =>
+    `<div class="species-item" data-idx="${i}">
       <strong>${esc(p.common_name)}</strong>
       <span>${esc(p.scientific_name)}</span>
     </div>`
@@ -530,8 +533,18 @@ speciesInput.addEventListener('input', function() {
   speciesResults.style.display = '';
 });
 
+speciesResults.addEventListener('mousedown', handleSpeciesSelect);
+speciesResults.addEventListener('touchstart', handleSpeciesSelect, {passive: true});
+
+function handleSpeciesSelect(e) {
+  const item = e.target.closest('.species-item');
+  if (!item) return;
+  const idx = parseInt(item.dataset.idx, 10);
+  if (_currentHits[idx]) selectSpecies(_currentHits[idx]);
+}
+
 speciesInput.addEventListener('blur', function() {
-  setTimeout(() => { speciesResults.style.display = 'none'; }, 200);
+  setTimeout(() => { speciesResults.style.display = 'none'; }, 250);
 });
 
 function selectSpecies(p) {
