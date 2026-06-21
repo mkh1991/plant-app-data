@@ -4,8 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#4a7c59">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Plants">
+<meta name="theme-color" content="#152b1e">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
 <title>Plant Tracker</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -177,6 +180,32 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .filter-btn{padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);background:var(--white);color:var(--text-mid);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
 .filter-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
 .tag-placement{font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:99px;background:#e8f0fe;color:#1a56db}
+
+/* ── Responsive: tablet / desktop ── */
+@media (min-width: 720px) {
+  #app{max-width:1180px}
+  header{padding:16px 36px 14px}
+  header h1{font-size:1.35rem}
+  #main-content{
+    padding:24px 36px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 400px;
+    column-gap:32px;
+    align-items:start;
+  }
+  nav{display:none}
+  #view-dashboard,#view-add{display:block !important}
+  #view-add{position:sticky;top:72px}
+  #add-form{border-radius:var(--radius)}
+  .summary-chip{padding:14px 10px 13px}
+  .summary-chip .num{font-size:2rem}
+  .summary-strip{gap:12px;margin-bottom:18px}
+  .filter-bar{margin-bottom:16px}
+  .plant-card{margin-bottom:14px}
+}
+@media (min-width: 1024px) {
+  #main-content{padding:28px 44px;column-gap:40px}
+}
 
 /* ── Dark mode ── */
 @media(prefers-color-scheme:dark){
@@ -711,13 +740,27 @@ function selectSpecies(i) {
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────
+function isDesktop() { return window.matchMedia('(min-width:720px)').matches; }
+
 function showTab(tab) {
-  document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
-  document.getElementById('view-add').style.display = tab === 'add' ? '' : 'none';
+  if (!isDesktop()) {
+    document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
+    document.getElementById('view-add').style.display = tab === 'add' ? '' : 'none';
+  } else {
+    document.getElementById('view-dashboard').style.display = '';
+    document.getElementById('view-add').style.display = '';
+  }
   document.getElementById('tab-dashboard').className = tab === 'dashboard' ? 'active' : '';
   document.getElementById('tab-add').className = tab === 'add' ? 'active' : '';
   if (tab === 'dashboard') renderDashboard();
 }
+
+window.addEventListener('resize', () => {
+  if (isDesktop()) {
+    document.getElementById('view-dashboard').style.display = '';
+    document.getElementById('view-add').style.display = '';
+  }
+});
 
 // ── Toast notification ────────────────────────────────────────────────────
 let _toastTimer;
