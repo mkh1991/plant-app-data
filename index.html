@@ -544,7 +544,9 @@ function resetAddForm() {
   document.getElementById('inp-days').value = '7';
   document.getElementById('inp-last-watered').value = '';
   document.getElementById('matched-info').innerHTML = '';
-  document.getElementById('species-results').innerHTML = '';
+  const _srReset = document.getElementById('species-results');
+  _srReset.innerHTML = '';
+  _srReset.style.display = 'none';
   _matchedDbEntry = null;
 }
 
@@ -558,13 +560,14 @@ function normalise(s) {
 function onSpeciesInput(val) {
   const el = document.getElementById('species-results');
   const q = val.trim();
-  if (q.length < 2) { el.innerHTML = ''; return; }
+  if (q.length < 2) { el.innerHTML = ''; el.style.display = 'none'; return; }
   const qn = normalise(q);
   _currentHits = PLANTS_DB.filter(p =>
     normalise(p.common_name).includes(qn) ||
     normalise(p.scientific_name).includes(qn)
   ).slice(0, 8);
-  if (!_currentHits.length) { el.innerHTML = ''; return; }
+  if (!_currentHits.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
+  el.style.display = 'block';
   el.innerHTML = _currentHits.map((p, i) =>
     `<div class="species-item" onclick="selectSpecies(${i})">`+
     `<strong>${esc(p.common_name)}</strong>`+
@@ -583,7 +586,9 @@ function selectSpecies(i) {
   document.getElementById('inp-days').value = p.watering_days || 7;
   document.getElementById('matched-info').innerHTML =
     `<span class="matched-badge">✓ Auto-filled from database</span>`;
-  document.getElementById('species-results').innerHTML = '';
+  const _sr = document.getElementById('species-results');
+  _sr.innerHTML = '';
+  _sr.style.display = 'none';
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────
