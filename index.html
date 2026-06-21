@@ -192,10 +192,8 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 
           <div>
             <label class="field-label" for="inp-species">Species (optional)</label>
-            <div class="species-wrap">
-              <input class="field-input" id="inp-species" type="text" placeholder="Search common or scientific name…" autocomplete="off" autocorrect="off" spellcheck="false">
-              <div id="species-results"></div>
-            </div>
+            <input class="field-input" id="inp-species" type="text" placeholder="Search common or scientific name…" autocomplete="off" autocorrect="off" spellcheck="false" oninput="onSpeciesInput(this.value)">
+            <div id="species-results"></div>
             <div id="matched-info"></div>
           </div>
 
@@ -503,59 +501,45 @@ function resetAddForm() {
   document.getElementById('inp-days').value = '7';
   document.getElementById('inp-last-watered').value = '';
   document.getElementById('matched-info').innerHTML = '';
-  document.getElementById('species-results').style.display = 'none';
+  document.getElementById('species-results').innerHTML = '';
   _matchedDbEntry = null;
 }
 
 // ── Species autocomplete ──────────────────────────────────────────────────
-const speciesInput = document.getElementById('inp-species');
-const speciesResults = document.getElementById('species-results');
 let _currentHits = [];
 
 function normalise(s) {
   return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-speciesInput.addEventListener('input', function() {
-  const q = this.value.trim();
-  if (q.length < 2) { speciesResults.style.display = 'none'; return; }
+function onSpeciesInput(val) {
+  const el = document.getElementById('species-results');
+  const q = val.trim();
+  if (q.length < 2) { el.innerHTML = ''; return; }
   const qn = normalise(q);
   _currentHits = PLANTS_DB.filter(p =>
     normalise(p.common_name).includes(qn) ||
     normalise(p.scientific_name).includes(qn)
   ).slice(0, 8);
-  if (!_currentHits.length) { speciesResults.style.display = 'none'; return; }
-  speciesResults.innerHTML = _currentHits.map((p, i) =>
-    `<div class="species-item" data-idx="${i}">
-      <strong>${esc(p.common_name)}</strong>
-      <span>${esc(p.scientific_name)}</span>
-    </div>`
+  if (!_currentHits.length) { el.innerHTML = ''; return; }
+  el.innerHTML = _currentHits.map((p, i) =>
+    `<div class="species-item" onclick="selectSpecies(${i})">`+
+    `<strong>${esc(p.common_name)}</strong>`+
+    `<span>${esc(p.scientific_name)}</span>`+
+    `</div>`
   ).join('');
-  speciesResults.style.display = 'block';
-});
-
-speciesResults.addEventListener('mousedown', handleSpeciesSelect);
-speciesResults.addEventListener('touchstart', handleSpeciesSelect, {passive: true});
-
-function handleSpeciesSelect(e) {
-  const item = e.target.closest('.species-item');
-  if (!item) return;
-  const idx = parseInt(item.dataset.idx, 10);
-  if (_currentHits[idx]) selectSpecies(_currentHits[idx]);
 }
 
-speciesInput.addEventListener('blur', function() {
-  setTimeout(() => { speciesResults.style.display = 'none'; }, 400);
-});
-
-function selectSpecies(p) {
+function selectSpecies(i) {
+  const p = _currentHits[i];
+  if (!p) return;
   _matchedDbEntry = p;
-  speciesInput.value = p.common_name;
+  document.getElementById('inp-species').value = p.common_name;
   document.getElementById('inp-sunlight').value = p.sunlight || 'medium';
   document.getElementById('inp-days').value = p.watering_days || 7;
   document.getElementById('matched-info').innerHTML =
     `<span class="matched-badge">✓ Auto-filled from database</span>`;
-  speciesResults.style.display = 'none';
+  document.getElementById('species-results').innerHTML = '';
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────
