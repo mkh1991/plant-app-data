@@ -782,6 +782,10 @@ document.getElementById('js-check').style.display = 'none';
 load();
 if (!_storageOk) document.getElementById('storage-warn').style.display = '';
 renderDashboard();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
 </script>
 </body>
 </html>
