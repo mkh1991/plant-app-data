@@ -193,9 +193,8 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
     column-gap:32px;
     align-items:start;
   }
-  nav{display:none}
-  #view-dashboard,#view-add{display:block !important}
-  #view-add{position:sticky;top:72px}
+  nav{grid-column:1/-1}
+  #view-add{display:block !important;position:sticky;top:72px}
   #add-form{border-radius:var(--radius)}
   .summary-chip{padding:14px 10px 13px}
   .summary-chip .num{font-size:2rem}
@@ -206,6 +205,26 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 @media (min-width: 1024px) {
   #main-content{padding:28px 44px;column-gap:40px}
 }
+
+/* ── Browse tab ── */
+.browse-search-wrap{margin-bottom:10px;position:relative}
+.browse-search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
+#browse-search{padding-left:34px}
+.browse-filter-group{margin-bottom:8px}
+.browse-filter-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);margin-bottom:5px}
+.browse-filters{display:flex;gap:5px;flex-wrap:wrap}
+.browse-filters .filter-btn{font-size:.75rem;padding:4px 11px}
+#browse-count{font-size:.78rem;color:var(--text-light);margin:8px 0 6px;font-weight:600}
+.browse-card{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--white);border-radius:var(--radius-sm);margin-bottom:7px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:box-shadow .15s}
+.browse-card:hover{box-shadow:var(--shadow-lg)}
+.browse-card-info{flex:1;min-width:0}
+.browse-name{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browse-sci{font-size:.73rem;color:var(--text-light);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browse-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.browse-add-btn{flex-shrink:0;background:var(--green-pale);color:var(--green-dark);font-size:.78rem;font-weight:700;padding:6px 12px;border-radius:99px;border:1.5px solid transparent;transition:background .15s,color .15s;white-space:nowrap}
+.browse-add-btn:hover{background:var(--green);color:#fff}
+#browse-results{max-height:calc(100vh - 300px);overflow-y:auto}
+@media(min-width:720px){#browse-results{max-height:none}}
 
 /* ── Dark mode ── */
 @media(prefers-color-scheme:dark){
@@ -261,7 +280,8 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
   <div id="main-content">
     <nav>
       <button id="tab-dashboard" class="active" onclick="showTab('dashboard')">Dashboard</button>
-      <button id="tab-add" onclick="showTab('add')">+ Add Plant</button>
+      <button id="tab-browse" onclick="showTab('browse')">Browse</button>
+      <button id="tab-add" onclick="showTab('add')">+ Add</button>
     </nav>
 
     <!-- Dashboard -->
@@ -281,6 +301,34 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
           Add your first plant
         </button>
       </div>
+    </div>
+
+    <!-- Browse plants DB -->
+    <div id="view-browse" style="display:none">
+      <div class="browse-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="browse-search" class="field-input" type="search" placeholder="Search 337 plants…" autocomplete="off" oninput="renderBrowse()">
+      </div>
+      <div class="browse-filter-group">
+        <div class="browse-filter-label">Pet safety</div>
+        <div class="browse-filters" id="bf-tox">
+          <button class="filter-btn active" onclick="setBrowseFilter('tox','all')">All</button>
+          <button class="filter-btn" onclick="setBrowseFilter('tox','safe')">✓ Pet safe</button>
+          <button class="filter-btn" onclick="setBrowseFilter('tox','toxic-pets')">🐾 Toxic to pets</button>
+          <button class="filter-btn" onclick="setBrowseFilter('tox','toxic-all')">⚠ Toxic</button>
+        </div>
+      </div>
+      <div class="browse-filter-group">
+        <div class="browse-filter-label">Care level</div>
+        <div class="browse-filters" id="bf-care">
+          <button class="filter-btn active" onclick="setBrowseFilter('care','all')">All</button>
+          <button class="filter-btn" onclick="setBrowseFilter('care','easy')">🌿 Easy</button>
+          <button class="filter-btn" onclick="setBrowseFilter('care','moderate')">🌱 Moderate</button>
+          <button class="filter-btn" onclick="setBrowseFilter('care','difficult')">🔆 Difficult</button>
+        </div>
+      </div>
+      <div id="browse-count"></div>
+      <div id="browse-results"></div>
     </div>
 
     <!-- Add Plant -->
@@ -740,24 +788,78 @@ function selectSpecies(i) {
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────
+// ── Browse ────────────────────────────────────────────────────────────────
+let _browseTox = 'all', _browseCare = 'all', _browseResults = [];
+
+function setBrowseFilter(type, val) {
+  if (type === 'tox')  _browseTox  = val;
+  if (type === 'care') _browseCare = val;
+  // Update active button in that group
+  const groupId = type === 'tox' ? 'bf-tox' : 'bf-care';
+  document.querySelectorAll('#' + groupId + ' .filter-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes("'" + val + "'"));
+  });
+  renderBrowse();
+}
+
+function renderBrowse() {
+  const q = (document.getElementById('browse-search').value || '').trim();
+  const qn = q.length >= 2 ? normalise(q) : '';
+  _browseResults = PLANTS_DB.filter(p => {
+    if (qn && !normalise(p.common_name).includes(qn) && !normalise(p.scientific_name).includes(qn)) return false;
+    if (_browseTox  !== 'all' && p.toxicity   !== _browseTox)  return false;
+    if (_browseCare !== 'all' && p.care_level !== _browseCare) return false;
+    return true;
+  });
+  const shown = _browseResults.slice(0, 60);
+  document.getElementById('browse-count').textContent =
+    _browseResults.length + ' plant' + (_browseResults.length !== 1 ? 's' : '') +
+    (_browseResults.length > 60 ? ' (showing first 60)' : '');
+  document.getElementById('browse-results').innerHTML = shown.map((p, i) =>
+    `<div class="browse-card">` +
+      `<div class="browse-card-info">` +
+        `<div class="browse-name">${esc(p.common_name)}</div>` +
+        (p.scientific_name ? `<div class="browse-sci">${esc(p.scientific_name)}</div>` : '') +
+        `<div class="browse-tags">${toxicTag(p.toxicity)}${careTag(p.care_level)}${placementTag(p.placement)}</div>` +
+      `</div>` +
+      `<button class="browse-add-btn" onclick="addFromBrowse(${i})">+ Add</button>` +
+    `</div>`
+  ).join('');
+}
+
+function addFromBrowse(idx) {
+  const p = _browseResults[idx];
+  if (!p) return;
+  _matchedDbEntry = p;
+  document.getElementById('inp-species').value = p.common_name;
+  document.getElementById('inp-sunlight').value = p.sunlight || 'medium';
+  document.getElementById('inp-days').value = p.watering_days || 7;
+  document.getElementById('matched-info').innerHTML = `<span class="matched-badge">✓ Auto-filled from database</span>`;
+  const sr = document.getElementById('species-results');
+  sr.innerHTML = ''; sr.style.display = 'none';
+  showTab('add');
+  setTimeout(() => document.getElementById('inp-name').focus(), 80);
+}
+
 function isDesktop() { return window.matchMedia('(min-width:720px)').matches; }
 
 function showTab(tab) {
-  if (!isDesktop()) {
-    document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
-    document.getElementById('view-add').style.display = tab === 'add' ? '' : 'none';
-  } else {
-    document.getElementById('view-dashboard').style.display = '';
-    document.getElementById('view-add').style.display = '';
-  }
-  document.getElementById('tab-dashboard').className = tab === 'dashboard' ? 'active' : '';
-  document.getElementById('tab-add').className = tab === 'add' ? 'active' : '';
+  const desktop = isDesktop();
+  // Left-column views: dashboard and browse always toggle
+  document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
+  document.getElementById('view-browse').style.display   = tab === 'browse'    ? '' : 'none';
+  // Add form: always visible on desktop, toggled on mobile
+  document.getElementById('view-add').style.display = (desktop || tab === 'add') ? '' : 'none';
+  ['dashboard','browse','add'].forEach(t => {
+    const b = document.getElementById('tab-' + t);
+    if (b) b.className = t === tab ? 'active' : '';
+  });
   if (tab === 'dashboard') renderDashboard();
+  if (tab === 'browse') renderBrowse();
 }
 
 window.addEventListener('resize', () => {
   if (isDesktop()) {
-    document.getElementById('view-dashboard').style.display = '';
     document.getElementById('view-add').style.display = '';
   }
 });
