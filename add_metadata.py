@@ -254,6 +254,67 @@ CARE_OVERRIDES = {
 }
 
 
+# ── Placement: "indoor" | "outdoor" | "both"
+# Base rule: low/medium → indoor, medium-high → both, high → outdoor
+# Genus/name overrides handle exceptions (e.g. aloe is "high" but lives indoors)
+PLACEMENT_BY_GENUS = {
+    # Indoor tropical foliage
+    "epipremnum": "indoor", "scindapsus": "indoor", "philodendron": "indoor",
+    "thaumatophyllum": "indoor", "monstera": "indoor", "rhaphidophora": "indoor",
+    "spathiphyllum": "indoor", "aglaonema": "indoor", "dieffenbachia": "indoor",
+    "caladium": "indoor", "syngonium": "indoor", "anthurium": "indoor",
+    "dracaena": "indoor", "cordyline": "indoor", "zamioculcas": "indoor",
+    "aspidistra": "indoor", "sansevieria": "indoor",
+    # Indoor succulents & cacti (high-light but window-sill plants)
+    "aloe": "indoor", "haworthia": "indoor", "haworthiopsis": "indoor",
+    "gasteria": "indoor", "crassula": "indoor", "echeveria": "indoor",
+    "kalanchoe": "indoor", "portulacaria": "indoor", "beaucarnea": "indoor",
+    # Indoor palms & ferns
+    "chamaedorea": "indoor", "rhapis": "indoor", "howea": "indoor",
+    "nephrolepis": "indoor", "asplenium": "indoor", "platycerium": "indoor",
+    # Indoor other
+    "peperomia": "indoor", "pilea": "indoor", "hoya": "indoor",
+    "chlorophytum": "indoor", "tradescantia": "indoor", "oxalis": "indoor",
+    "pachira": "indoor", "schefflera": "indoor",
+    "ficus": "indoor",          # fiddle leaf fig, rubber plant — kept indoors
+    # Outdoor (vegetables, fruit, true outdoor ornamentals)
+    "solanum": "outdoor", "capsicum": "outdoor", "fragaria": "outdoor",
+    "citrus": "outdoor", "punica": "outdoor", "olea": "outdoor",
+    "helianthus": "outdoor", "tagetes": "outdoor",
+    "tulipa": "outdoor", "narcissus": "outdoor", "hyacinthus": "outdoor",
+    "rosa": "outdoor", "bougainvillea": "outdoor",
+    "lavandula": "outdoor",
+    "cycas": "outdoor",
+    # Both (herbs, plants happy indoors or outdoors)
+    "ocimum": "both", "mentha": "both", "thymus": "both", "salvia": "both",
+    "hibiscus": "both", "jasminum": "both", "begonia": "both",
+    "strelitzia": "both", "plumeria": "both",
+    "sedum": "both", "sempervivum": "both", "agave": "both", "yucca": "both",
+}
+
+PLACEMENT_OVERRIDES = {
+    "aloe vera": "indoor", "jade plant": "indoor", "snake plant": "indoor",
+    "pothos": "indoor", "zz plant": "indoor", "peace lily": "indoor",
+    "spider plant": "indoor", "lucky bamboo": "indoor",
+    "chinese evergreen": "indoor", "boston fern": "indoor",
+    "fiddle leaf fig": "indoor", "rubber plant": "indoor",
+    "money tree": "indoor", "bird of paradise": "both",
+    "string of pearls": "indoor", "string of hearts": "indoor",
+    "string of dolphins": "indoor", "string of bananas": "indoor",
+    "tomato": "outdoor", "sunflower": "outdoor", "marigold": "outdoor",
+    "tulip": "outdoor", "daffodil": "outdoor", "hyacinth": "outdoor",
+    "lavender": "outdoor", "rosemary": "both", "basil": "both",
+    "mint": "both", "thyme": "both",
+}
+
+PLACEMENT_BY_SUNLIGHT = {
+    "low": "indoor",
+    "medium": "indoor",
+    "medium-high": "both",
+    "high": "outdoor",
+}
+
+
 def get_genus(scientific_name):
     if not scientific_name:
         return ""
@@ -291,23 +352,43 @@ def get_care(plant):
     return "moderate"
 
 
+def get_placement(plant):
+    cn = plant.get("common_name", "").lower()
+    sci = plant.get("scientific_name", "")
+    genus = get_genus(sci)
+
+    for key, val in PLACEMENT_OVERRIDES.items():
+        if key.lower() in cn:
+            return val
+
+    if genus in PLACEMENT_BY_GENUS:
+        return PLACEMENT_BY_GENUS[genus]
+
+    sunlight = plant.get("sunlight", "medium")
+    return PLACEMENT_BY_SUNLIGHT.get(sunlight, "both")
+
+
 db = json.load(open("plants_db.json"))
 for p in db:
     p["toxicity"] = get_toxicity(p)
     p["care_level"] = get_care(p)
+    p["placement"] = get_placement(p)
 
 with open("plants_db.json", "w") as f:
     json.dump(db, f, indent=2, ensure_ascii=False)
 
 by_tox = {}
 by_care = {}
+by_place = {}
 for p in db:
     by_tox[p["toxicity"]] = by_tox.get(p["toxicity"], 0) + 1
     by_care[p["care_level"]] = by_care.get(p["care_level"], 0) + 1
+    by_place[p["placement"]] = by_place.get(p["placement"], 0) + 1
 
 print(f"Updated {len(db)} plants")
 print("Toxicity breakdown:", by_tox)
 print("Care level breakdown:", by_care)
+print("Placement breakdown:", by_place)
 print("\nSample:")
 for p in db[:5]:
-    print(f"  {p['common_name']}: {p['toxicity']}, {p['care_level']}")
+    print(f"  {p['common_name']}: {p['toxicity']}, {p['care_level']}, {p['placement']}")
