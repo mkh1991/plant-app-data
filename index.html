@@ -206,6 +206,36 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
   #main-content{padding:28px 44px;column-gap:40px}
 }
 
+/* ── Plant ID ── */
+.id-top-row{display:flex;gap:6px;align-items:center}
+.btn-id{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border-radius:var(--radius-sm);border:1.5px dashed var(--green);background:var(--green-mist);color:var(--green-dark);font-size:.88rem;font-weight:600;transition:background .15s,border-color .15s;cursor:pointer}
+.btn-id:hover{background:var(--green-pale);border-style:solid}
+.btn-id-settings{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--white);color:var(--text-light);flex-shrink:0;transition:background .15s,color .15s}
+.btn-id-settings:hover{background:var(--green-mist);color:var(--green-dark)}
+.id-organs{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.organ-btn{padding:3px 10px;border-radius:99px;font-size:.74rem;font-weight:600;border:1.5px solid var(--border);background:var(--white);color:var(--text-mid);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.organ-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+#id-content{margin-top:9px;border-radius:var(--radius-sm);border:1.5px solid var(--border);overflow:hidden;background:var(--white)}
+.id-thumb-row{display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--green-mist);border-bottom:1px solid var(--border)}
+#id-thumb{width:68px;height:68px;object-fit:cover;border-radius:7px;border:1.5px solid var(--border);flex-shrink:0}
+#id-status{font-size:.82rem;color:var(--text-mid);flex:1;align-self:center}
+.id-result{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;border-top:1px solid var(--border);transition:background .12s}
+.id-result:first-child{border-top:none}
+.id-result:hover{background:var(--green-mist)}
+.id-result-name{flex:1;min-width:0}
+.id-result-name strong{font-size:.87rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.id-result-name span{font-size:.74rem;color:var(--text-light)}
+.id-result-right{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.id-pct{font-size:.82rem;font-weight:700;color:var(--text-mid)}
+.id-db-badge{font-size:.69rem;font-weight:700;padding:2px 6px;border-radius:99px;background:var(--green-pale);color:var(--green-dark)}
+.id-setup-card{background:var(--earth-pale);border-radius:var(--radius-sm);padding:11px 12px;border:1.5px solid var(--earth-light);margin-bottom:9px}
+.id-setup-card p{font-size:.8rem;color:var(--text-mid);margin-bottom:7px;line-height:1.45}
+.id-setup-card a{color:var(--green-dark);text-decoration:underline}
+.id-key-row{display:flex;gap:6px}
+.id-key-row input{flex:1}
+.btn-id-save{padding:8px 13px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.82rem;font-weight:700;white-space:nowrap;transition:background .15s}
+.btn-id-save:hover{background:var(--green-dark)}
+
 /* ── Browse tab ── */
 .browse-search-wrap{margin-bottom:10px;position:relative}
 .browse-search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
@@ -336,6 +366,43 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
       <div id="add-form">
         <h2>Add a new plant</h2>
         <div class="form-grid">
+          <!-- Plant ID panel -->
+          <div class="id-panel">
+            <div id="id-setup" style="display:none">
+              <div class="id-setup-card">
+                <p>Get a free API key at <a href="https://my.plantnet.org/" target="_blank" rel="noopener">my.plantnet.org</a> — 500 IDs/day, free signup.</p>
+                <div class="id-key-row">
+                  <input id="id-key-input" class="field-input" type="password" placeholder="Paste your PlantNet API key…" style="font-size:.85rem;padding:8px 10px" autocomplete="off">
+                  <button class="btn-id-save" onclick="saveIdKey()">Save</button>
+                </div>
+              </div>
+            </div>
+            <input type="file" id="id-file" accept="image/*" capture="environment" style="display:none" onchange="handleIdFile(this)">
+            <div class="id-top-row">
+              <button class="btn-id" onclick="triggerIdentify()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                Identify from photo
+              </button>
+              <button class="btn-id-settings" onclick="toggleIdSetup()" title="API key settings">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </button>
+            </div>
+            <div class="id-organs">
+              <button class="organ-btn active" onclick="setOrgan('leaf',this)">Leaf</button>
+              <button class="organ-btn" onclick="setOrgan('flower',this)">Flower</button>
+              <button class="organ-btn" onclick="setOrgan('habit',this)">Whole plant</button>
+              <button class="organ-btn" onclick="setOrgan('fruit',this)">Fruit</button>
+            </div>
+            <div id="id-content" style="display:none">
+              <div class="id-thumb-row">
+                <img id="id-thumb" alt="Plant photo">
+                <div id="id-status"></div>
+              </div>
+              <div id="id-results"></div>
+            </div>
+          </div>
+          <hr class="form-divider">
+
           <div>
             <label class="field-label" for="inp-name">Plant name <span style="color:var(--status-red)">*</span></label>
             <input class="field-input" id="inp-name" type="text" placeholder="e.g. Kitchen Pothos" autocomplete="off">
@@ -744,6 +811,165 @@ function resetAddForm() {
   _srReset.innerHTML = '';
   _srReset.style.display = 'none';
   _matchedDbEntry = null;
+  document.getElementById('id-content').style.display = 'none';
+  document.getElementById('id-setup').style.display = 'none';
+  document.getElementById('id-results').innerHTML = '';
+  _idResults = [];
+}
+
+// ── Plant ID via PlantNet ─────────────────────────────────────────────────
+const ID_KEY_STORAGE = 'plantnet-api-key';
+let _idOrgan = 'leaf';
+let _idResults = [];
+
+function getIdKey() { return localStorage.getItem(ID_KEY_STORAGE) || ''; }
+
+function toggleIdSetup() {
+  const el = document.getElementById('id-setup');
+  el.style.display = el.style.display === 'none' ? '' : 'none';
+  if (el.style.display !== 'none') document.getElementById('id-key-input').focus();
+}
+
+function saveIdKey() {
+  const val = document.getElementById('id-key-input').value.trim();
+  if (!val) { toast('Please paste your API key first'); return; }
+  localStorage.setItem(ID_KEY_STORAGE, val);
+  document.getElementById('id-setup').style.display = 'none';
+  toast('API key saved!');
+  document.getElementById('id-file').click();
+}
+
+function triggerIdentify() {
+  if (!getIdKey()) {
+    document.getElementById('id-setup').style.display = '';
+    document.getElementById('id-key-input').focus();
+    return;
+  }
+  document.getElementById('id-file').click();
+}
+
+function setOrgan(organ, btn) {
+  _idOrgan = organ;
+  document.querySelectorAll('.organ-btn').forEach(b => b.classList.toggle('active', b === btn));
+}
+
+async function handleIdFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const content = document.getElementById('id-content');
+  const thumb = document.getElementById('id-thumb');
+  const statusEl = document.getElementById('id-status');
+  const resultsEl = document.getElementById('id-results');
+  content.style.display = '';
+  thumb.src = URL.createObjectURL(file);
+  statusEl.textContent = 'Identifying…';
+  resultsEl.innerHTML = '';
+  _idResults = [];
+  try {
+    const resized = await resizeForUpload(file, 1000);
+    const fd = new FormData();
+    fd.append('images', resized, 'plant.jpg');
+    fd.append('organs', _idOrgan);
+    const resp = await fetch(
+      `https://my-api.plantnet.org/v2/identify/all?api-key=${encodeURIComponent(getIdKey())}&lang=en&nb-results=5`,
+      { method: 'POST', body: fd }
+    );
+    if (resp.status === 404) { statusEl.textContent = ''; renderIdResults([]); input.value = ''; return; }
+    if (resp.status === 401) throw new Error('Invalid API key — check your key in settings');
+    if (resp.status === 429) throw new Error('Rate limit reached — try again later');
+    if (!resp.ok) throw new Error(`API error ${resp.status}`);
+    const data = await resp.json();
+    statusEl.textContent = '';
+    _idResults = data.results || [];
+    renderIdResults(_idResults);
+  } catch(err) {
+    statusEl.innerHTML = `<span style="color:var(--status-red)">${esc(err.message)}</span>`;
+  }
+  input.value = '';
+}
+
+function resizeForUpload(file, maxPx) {
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let w = img.width, h = img.height;
+      if (w > maxPx || h > maxPx) {
+        if (w > h) { h = Math.round(h * maxPx / w); w = maxPx; }
+        else { w = Math.round(w * maxPx / h); h = maxPx; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      canvas.toBlob(resolve, 'image/jpeg', 0.85);
+    };
+    img.src = url;
+  });
+}
+
+function matchIdToDb(sciName, commonNames) {
+  const scin = normalise(sciName);
+  let match = PLANTS_DB.find(p => normalise(p.scientific_name) === scin);
+  if (match) return match;
+  const genus2 = scin.split(' ').slice(0, 2).join(' ');
+  if (genus2) match = PLANTS_DB.find(p => normalise(p.scientific_name).startsWith(genus2));
+  if (match) return match;
+  for (const cn of (commonNames || [])) {
+    const cnn = normalise(cn);
+    match = PLANTS_DB.find(p => normalise(p.common_name).includes(cnn) || cnn.includes(normalise(p.common_name)));
+    if (match) return match;
+  }
+  return null;
+}
+
+function renderIdResults(results) {
+  const el = document.getElementById('id-results');
+  if (!results.length) {
+    el.innerHTML = '<p style="padding:10px 12px;font-size:.82rem;color:var(--text-light)">No matches found — try a closer photo or different organ type.</p>';
+    return;
+  }
+  el.innerHTML = results.slice(0, 5).map((r, i) => {
+    const sci = r.species?.scientificNameWithoutAuthor || '';
+    const common = (r.species?.commonNames || [])[0] || '';
+    const pct = Math.round((r.score || 0) * 100);
+    const inDb = !!matchIdToDb(sci, r.species?.commonNames || []);
+    return `<div class="id-result" onclick="selectIdResult(${i})">
+      <div class="id-result-name">
+        <strong>${esc(sci)}</strong>
+        ${common ? `<span>${esc(common)}</span>` : ''}
+      </div>
+      <div class="id-result-right">
+        ${inDb ? '<span class="id-db-badge">In DB</span>' : ''}
+        <span class="id-pct">${pct}%</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectIdResult(i) {
+  const r = _idResults[i];
+  if (!r) return;
+  const sci = r.species?.scientificNameWithoutAuthor || '';
+  const commonNames = r.species?.commonNames || [];
+  const common = commonNames[0] || '';
+  const dbMatch = matchIdToDb(sci, commonNames);
+  if (dbMatch) {
+    _matchedDbEntry = dbMatch;
+    document.getElementById('inp-species').value = dbMatch.common_name;
+    document.getElementById('inp-sunlight').value = dbMatch.sunlight || 'medium';
+    document.getElementById('inp-days').value = dbMatch.watering_days || 7;
+    document.getElementById('matched-info').innerHTML = `<span class="matched-badge">✓ Matched: ${esc(dbMatch.common_name)}</span>`;
+  } else {
+    document.getElementById('inp-species').value = sci;
+    document.getElementById('matched-info').innerHTML =
+      `<span class="matched-badge" style="background:var(--earth-pale);color:var(--earth)">Identified — set care details below</span>`;
+  }
+  if (!document.getElementById('inp-name').value.trim()) {
+    document.getElementById('inp-name').value = common || sci;
+  }
+  document.getElementById('id-content').style.display = 'none';
+  toast('Species selected!');
 }
 
 // ── Species autocomplete ──────────────────────────────────────────────────
@@ -888,6 +1114,15 @@ renderDashboard();
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }
+
+function updateIdVisibility() {
+  const show = navigator.onLine;
+  document.querySelector('.id-panel').style.display = show ? '' : 'none';
+  document.querySelector('.id-panel + .form-divider').style.display = show ? '' : 'none';
+}
+window.addEventListener('online', updateIdVisibility);
+window.addEventListener('offline', updateIdVisibility);
+updateIdVisibility();
 </script>
 </body>
 </html>
