@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Plants">
+<meta name="theme-color" content="#152b1e">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
+<title>Plant Tracker</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green-dark:#2d5a3d;
+  --green:#4a7c59;
+  --green-light:#6fa37b;
+  --green-pale:#d4ead9;
+  --green-mist:#eef6f0;
+  --earth:#8b6f47;
+  --earth-light:#c4a882;
+  --earth-pale:#f5ede0;
+  --cream:#faf8f4;
+  --white:#ffffff;
+  --text:#1e2820;
+  --text-mid:#4a5249;
+  --text-light:#788076;
+  --border:#dde8dc;
+  --status-green:#2d7a3d;
+  --status-green-bg:#e8f5eb;
+  --status-yellow:#8a6d00;
+  --status-yellow-bg:#fff9e0;
+  --status-red:#c0392b;
+  --status-red-bg:#fdecea;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 2px 12px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.13);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overscroll-behavior-y:none}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+
+/* ── Layout ── */
+#app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+header{background:linear-gradient(135deg,#152b1e 0%,var(--green-dark) 60%,#3a6e4e 100%);color:#fff;padding:18px 20px 15px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.22)}
+header h1{font-size:1.28rem;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+header .subtitle{font-size:.76rem;opacity:.68;margin-top:3px;letter-spacing:.01em}
+#main-content{flex:1;padding:16px}
+
+/* ── Nav ── */
+nav{background:var(--white);border-radius:var(--radius-sm);padding:4px;border:1.5px solid var(--border);margin-bottom:18px;display:flex;gap:3px;box-shadow:var(--shadow)}
+nav button{flex:1;padding:8px 0;border-radius:8px;font-size:.88rem;font-weight:600;transition:background .18s,color .18s,box-shadow .18s;background:transparent;color:var(--text-mid);border:none}
+nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(74,140,95,.35)}
+
+/* ── Dashboard ── */
+#dashboard-empty{text-align:center;padding:56px 24px;color:var(--text-light)}
+#dashboard-empty .big-icon{font-size:3.5rem;margin-bottom:16px}
+#dashboard-empty p{font-size:1rem;line-height:1.6;max-width:260px;margin:0 auto 20px}
+.btn-primary{display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.92rem;font-weight:600;transition:background .15s}
+.btn-primary:hover{background:var(--green-dark)}
+.btn-danger{background:var(--status-red-bg);color:var(--status-red);border:1.5px solid #f5c6c2;padding:8px 16px;border-radius:var(--radius-sm);font-size:.85rem;font-weight:600}
+.btn-danger:hover{background:#f8d7d7}
+
+/* ── Plant cards ── */
+.plant-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;border:1.5px solid var(--border);transition:box-shadow .2s,transform .15s}
+.plant-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.card-header{display:flex;align-items:flex-start;gap:12px;padding:15px 16px;cursor:pointer;user-select:none}
+.card-status-bar{width:5px;border-radius:3px;align-self:stretch;flex-shrink:0}
+.status-green .card-status-bar{background:var(--status-green)}
+.status-yellow .card-status-bar{background:#f0b100}
+.status-red .card-status-bar{background:var(--status-red)}
+.card-info{flex:1;min-width:0}
+.card-name{font-size:1.02rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-species{font-size:.78rem;color:var(--text-light);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{display:flex;align-items:center;gap:8px;margin-top:7px;flex-wrap:wrap}
+.sunlight-tag{display:inline-flex;align-items:center;gap:3px;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--earth-pale);color:var(--earth)}
+.water-status{font-size:.8rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.status-green .water-status{background:var(--status-green-bg);color:var(--status-green)}
+.status-yellow .water-status{background:var(--status-yellow-bg);color:var(--status-yellow)}
+.status-red .water-status{background:var(--status-red-bg);color:var(--status-red)}
+.tag-toxic-pets{font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:99px;background:#fff0e0;color:#b85000}
+.tag-toxic-all{font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:99px;background:#fdecea;color:#c0392b}
+.tag-care{font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:99px;background:#eef6f0;color:#2d5a3d}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.info-cell{background:var(--white);border-radius:var(--radius-sm);padding:8px 10px;border:1px solid var(--border)}
+.info-cell .label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-light);margin-bottom:2px}
+.info-cell .value{font-size:.85rem;font-weight:600;color:var(--text)}
+.card-actions{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+.btn-water{background:var(--green);color:#fff;padding:8px 16px;border-radius:99px;font-size:.82rem;font-weight:700;transition:background .15s,transform .12s,box-shadow .15s;white-space:nowrap;box-shadow:0 2px 7px rgba(74,140,95,.32)}
+.btn-water:hover{background:var(--green-dark);box-shadow:0 3px 10px rgba(74,140,95,.42)}
+.btn-water:active{transform:scale(.95)}
+.btn-expand{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-light);transition:background .15s,transform .25s}
+.btn-expand:hover{background:var(--green-mist)}
+.btn-expand.open{transform:rotate(180deg)}
+
+/* ── Expanded card body ── */
+.card-body{display:none;border-top:1.5px solid var(--border);padding:14px 16px;background:var(--green-mist)}
+.card-body.open{display:block}
+.card-body-section{margin-bottom:14px}
+.card-body-section h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);margin-bottom:8px}
+.log-empty{font-size:.85rem;color:var(--text-light);font-style:italic}
+.log-list{list-style:none;max-height:160px;overflow-y:auto}
+.log-list li{font-size:.83rem;padding:5px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:8px}
+.log-list li:last-child{border-bottom:none}
+.log-date{color:var(--text-mid);font-weight:600;white-space:nowrap}
+.log-note{color:var(--text-light);flex:1;text-align:right}
+
+/* ── Edit form inside card ── */
+.edit-grid{display:grid;gap:10px}
+.field-row{display:flex;flex-direction:column;gap:3px}
+.field-row label{font-size:.78rem;font-weight:600;color:var(--text-mid)}
+.field-row input,.field-row select,.field-row textarea{padding:8px 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font:inherit;font-size:.88rem;background:var(--white);color:var(--text);transition:border-color .15s}
+.field-row input:focus,.field-row select:focus,.field-row textarea:focus{outline:none;border-color:var(--green)}
+.note-row{display:flex;gap:6px}
+.note-row input{flex:1}
+.btn-save-edit{background:var(--green);color:#fff;padding:9px 18px;border-radius:var(--radius-sm);font-size:.88rem;font-weight:700;margin-top:4px}
+.btn-save-edit:hover{background:var(--green-dark)}
+.card-actions-bottom{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+
+/* ── Add plant form ── */
+#add-form{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;border:1.5px solid var(--border)}
+#add-form h2{font-size:1.08rem;font-weight:700;margin-bottom:16px;color:var(--green-dark)}
+.form-grid{display:grid;gap:12px}
+.field-label{font-size:.82rem;font-weight:600;color:var(--text-mid);display:block;margin-bottom:3px}
+.field-input{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font:inherit;font-size:.92rem;background:var(--cream);color:var(--text)}
+.field-input:focus{outline:none;border-color:var(--green);background:var(--white)}
+.species-wrap{position:static}
+#species-results{background:var(--white);border:1.5px solid var(--green);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);max-height:220px;overflow-y:auto;display:none;margin-top:4px}
+.species-item{padding:10px 12px;cursor:pointer;font-size:.88rem;border-bottom:1px solid var(--border)}
+.species-item:last-child{border-bottom:none}
+.species-item:hover{background:var(--green-mist)}
+.species-item strong{color:var(--green-dark)}
+.species-item span{color:var(--text-light);font-size:.8rem;display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-hint{font-size:.75rem;color:var(--text-light);margin-top:3px}
+.btn-submit{width:100%;padding:14px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.95rem;font-weight:700;margin-top:6px;transition:background .15s,box-shadow .15s;box-shadow:0 3px 10px rgba(74,140,95,.3)}
+.btn-submit:hover{background:var(--green-dark);box-shadow:0 4px 14px rgba(74,140,95,.4)}
+.form-divider{border:none;border-top:1.5px solid var(--border);margin:4px 0}
+.matched-badge{background:var(--green-pale);color:var(--green-dark);font-size:.75rem;font-weight:600;padding:3px 9px;border-radius:99px;display:inline-block;margin-top:4px}
+
+/* ── Toast ── */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green-dark);color:#fff;padding:10px 20px;border-radius:99px;font-size:.88rem;font-weight:600;box-shadow:var(--shadow-lg);transition:transform .3s ease,opacity .3s;opacity:0;z-index:999;pointer-events:none;white-space:nowrap}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--green-light);border-radius:2px}
+
+/* ── Sunlight icon styles ── */
+.sun-low{color:#74a57f}
+.sun-medium{color:#c4a020}
+.sun-medium-high{color:#d07010}
+.sun-high{color:#d04010}
+
+/* ── Summary strip ── */
+.summary-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.summary-chip{background:var(--white);border-radius:var(--radius-sm);padding:12px 6px 11px;text-align:center;border:1.5px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.summary-chip::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.chip-red::before{background:var(--status-red)}
+.chip-yellow::before{background:#f0b100}
+.chip-green::before{background:var(--status-green)}
+.summary-chip .num{font-size:1.7rem;font-weight:900;line-height:1;letter-spacing:-.04em}
+.summary-chip .lbl{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);margin-top:3px}
+.chip-red .num{color:var(--status-red)}
+.chip-yellow .num{color:var(--status-yellow)}
+.chip-green .num{color:var(--status-green)}
+
+/* ── Progress bar ── */
+.water-progress{height:4px;border-radius:2px;background:var(--border);margin-top:9px;overflow:hidden}
+.water-progress-fill{height:100%;border-radius:2px;transition:width .4s ease}
+.status-green .water-progress-fill{background:var(--status-green)}
+.status-yellow .water-progress-fill{background:#f0b100}
+.status-red .water-progress-fill{background:var(--status-red)}
+
+/* ── Placement filter ── */
+.filter-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.filter-btn{padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);background:var(--white);color:var(--text-mid);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.filter-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+.tag-placement{font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:99px;background:#e8f0fe;color:#1a56db}
+
+/* ── Responsive: tablet / desktop ── */
+@media (min-width: 720px) {
+  #app{max-width:1180px}
+  header{padding:16px 36px 14px}
+  header h1{font-size:1.35rem}
+  #main-content{
+    padding:24px 36px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 400px;
+    column-gap:32px;
+    align-items:start;
+  }
+  nav{grid-column:1/-1}
+  #view-add{display:block !important;position:sticky;top:72px}
+  #add-form{border-radius:var(--radius)}
+  .summary-chip{padding:14px 10px 13px}
+  .summary-chip .num{font-size:2rem}
+  .summary-strip{gap:12px;margin-bottom:18px}
+  .filter-bar{margin-bottom:16px}
+  .plant-card{margin-bottom:14px}
+}
+@media (min-width: 1024px) {
+  #main-content{padding:28px 44px;column-gap:40px}
+}
+
+/* ── Browse tab ── */
+.browse-search-wrap{margin-bottom:10px;position:relative}
+.browse-search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
+#browse-search{padding-left:34px}
+.browse-filter-group{margin-bottom:8px}
+.browse-filter-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);margin-bottom:5px}
+.browse-filters{display:flex;gap:5px;flex-wrap:wrap}
+.browse-filters .filter-btn{font-size:.75rem;padding:4px 11px}
+#browse-count{font-size:.78rem;color:var(--text-light);margin:8px 0 6px;font-weight:600}
+.browse-card{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--white);border-radius:var(--radius-sm);margin-bottom:7px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:box-shadow .15s}
+.browse-card:hover{box-shadow:var(--shadow-lg)}
+.browse-card-info{flex:1;min-width:0}
+.browse-name{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browse-sci{font-size:.73rem;color:var(--text-light);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browse-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.browse-add-btn{flex-shrink:0;background:var(--green-pale);color:var(--green-dark);font-size:.78rem;font-weight:700;padding:6px 12px;border-radius:99px;border:1.5px solid transparent;transition:background .15s,color .15s;white-space:nowrap}
+.browse-add-btn:hover{background:var(--green);color:#fff}
+#browse-results{max-height:calc(100vh - 300px);overflow-y:auto}
+@media(min-width:720px){#browse-results{max-height:none}}
+
+/* ── Dark mode ── */
+@media(prefers-color-scheme:dark){
+  :root{
+    --green-dark:#3d7a52;
+    --green:#4a8c5f;
+    --green-light:#6fa37b;
+    --green-pale:#1c3524;
+    --green-mist:#162a1c;
+    --earth:#b89a72;
+    --earth-light:#a07850;
+    --earth-pale:#2a2018;
+    --cream:#111814;
+    --white:#1c2820;
+    --text:#e4ede6;
+    --text-mid:#9ab8a0;
+    --text-light:#6a8870;
+    --border:#263c2c;
+    --status-green:#52b872;
+    --status-green-bg:#0d2418;
+    --status-yellow:#c4a820;
+    --status-yellow-bg:#242010;
+    --status-red:#e05040;
+    --status-red-bg:#2c1010;
+    --shadow:0 2px 12px rgba(0,0,0,.35);
+    --shadow-lg:0 8px 32px rgba(0,0,0,.5);
+  }
+  header{background:#0e1c12}
+  .tag-placement{background:#1a2a4a;color:#7aadff}
+  .tag-toxic-pets{background:#3a2000;color:#e8a060}
+  .tag-toxic-all{background:#3a0e0e;color:#f07060}
+  .tag-care{background:#1c3524;color:#72c890}
+  select.field-input option{background:var(--white);color:var(--text)}
+}
+
+@media(max-width:400px){
+  .card-header{padding:12px}
+  .card-body{padding:12px}
+  #add-form{padding:16px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 12C5 7 8 4 12 4s7 3 7 8"/><path d="M5 12c-2-1-3-3-2-5a7 7 0 0 1 4-4"/><path d="M19 12c2-1 3-3 2-5a7 7 0 0 0-4-4"/></svg>
+      Plant Tracker
+    </h1>
+    <div class="subtitle">Watering &amp; sunlight care</div>
+  </header>
+
+  <div id="main-content">
+    <nav>
+      <button id="tab-dashboard" class="active" onclick="showTab('dashboard')">Dashboard</button>
+      <button id="tab-browse" onclick="showTab('browse')">Browse</button>
+      <button id="tab-add" onclick="showTab('add')">+ Add</button>
+    </nav>
+
+    <!-- Dashboard -->
+    <div id="view-dashboard">
+      <div class="summary-strip" id="summary-strip" style="display:none"></div>
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" onclick="setFilter('all')">All</button>
+        <button class="filter-btn" onclick="setFilter('indoor')">🏠 Indoor</button>
+        <button class="filter-btn" onclick="setFilter('outdoor')">🌳 Outdoor</button>
+      </div>
+      <div id="plant-list"></div>
+      <div id="dashboard-empty" style="display:none">
+        <div class="big-icon">🌱</div>
+        <p>No plants yet. Add your first plant to start tracking watering and care.</p>
+        <button class="btn-primary" onclick="showTab('add')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add your first plant
+        </button>
+      </div>
+    </div>
+
+    <!-- Browse plants DB -->
+    <div id="view-browse" style="display:none">
+      <div class="browse-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="browse-search" class="field-input" type="search" placeholder="Search 337 plants…" autocomplete="off" oninput="renderBrowse()">
+      </div>
+      <div class="browse-filter-group">
+        <div class="browse-filter-label">Pet safety</div>
+        <div class="browse-filters" id="bf-tox">
+          <button class="filter-btn active" onclick="setBrowseFilter('tox','all')">All</button>
+          <button class="filter-btn" onclick="setBrowseFilter('tox','safe')">✓ Pet safe</button>
+          <button class="filter-btn" onclick="setBrowseFilter('tox','toxic-pets')">🐾 Toxic to pets</button>
+          <button class="filter-btn" onclick="setBrowseFilter('tox','toxic-all')">⚠ Toxic</button>
+        </div>
+      </div>
+      <div class="browse-filter-group">
+        <div class="browse-filter-label">Care level</div>
+        <div class="browse-filters" id="bf-care">
+          <button class="filter-btn active" onclick="setBrowseFilter('care','all')">All</button>
+          <button class="filter-btn" onclick="setBrowseFilter('care','easy')">🌿 Easy</button>
+          <button class="filter-btn" onclick="setBrowseFilter('care','moderate')">🌱 Moderate</button>
+          <button class="filter-btn" onclick="setBrowseFilter('care','difficult')">🔆 Difficult</button>
+        </div>
+      </div>
+      <div id="browse-count"></div>
+      <div id="browse-results"></div>
+    </div>
+
+    <!-- Add Plant -->
+    <div id="view-add" style="display:none">
+      <div id="add-form">
+        <h2>Add a new plant</h2>
+        <div class="form-grid">
+          <div>
+            <label class="field-label" for="inp-name">Plant name <span style="color:var(--status-red)">*</span></label>
+            <input class="field-input" id="inp-name" type="text" placeholder="e.g. Kitchen Pothos" autocomplete="off">
+          </div>
+
+          <div>
+            <label class="field-label" for="inp-species">Species (optional)</label>
+            <input class="field-input" id="inp-species" type="text" placeholder="Search common or scientific name…" autocomplete="off" autocorrect="off" spellcheck="false" oninput="onSpeciesInput(this.value)">
+            <div id="species-results"></div>
+            <div id="matched-info"></div>
+          </div>
+
+          <hr class="form-divider">
+
+          <div class="row-2">
+            <div>
+              <label class="field-label" for="inp-sunlight">Sunlight</label>
+              <select class="field-input" id="inp-sunlight">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="medium-high">Medium-High</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="inp-days">Water every (days)</label>
+              <input class="field-input" id="inp-days" type="number" min="1" max="90" value="7">
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label" for="inp-last-watered">Last watered</label>
+            <input class="field-input" id="inp-last-watered" type="date">
+            <div class="field-hint">Leave blank to set as today</div>
+          </div>
+
+          <button class="btn-submit" onclick="addPlant()">Save plant</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="js-check" style="background:#c0392b;color:#fff;padding:12px 16px;text-align:center;font-weight:600">⚠️ JavaScript is not running — try a different browser</div>
+<div id="toast"></div>
+<div id="storage-warn" style="display:none;position:fixed;top:0;left:0;right:0;background:#8a4000;color:#fff;font-size:.82rem;padding:10px 16px;text-align:center;z-index:1000;line-height:1.4">
+  ⚠️ Your browser blocked data saving. Plants won't persist after closing — try opening in Chrome or hosting online.
+</div>
+
+<script>
+// ── Plant database (inlined) ──────────────────────────────────────────────
+const PLANTS_DB = [{"common_name":"Radermachera (China Doll)","scientific_name":"Radermachera sinica","sunlight":"medium","watering_days":7,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Hibiscus","scientific_name":"Hibiscus rosa-sinensis","sunlight":"high","watering_days":3,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Mimosa pudica (Touch-me-not)","scientific_name":"Mimosa pudica","sunlight":"medium","watering_days":4,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Alocasia Frydek","scientific_name":"Alocasia micholitziana 'Frydek'","sunlight":"medium","watering_days":7,"source":"curated-researched","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Jaaji Mallige (Jasmine)","scientific_name":"Jasminum grandiflorum","sunlight":"high","watering_days":7,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Suji Mallige (Arabian Jasmine)","scientific_name":"Jasminum sambac","sunlight":"high","watering_days":7,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Croton","scientific_name":"Codiaeum variegatum","sunlight":"medium-high","watering_days":5,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Birkin (Philodendron)","scientific_name":"Philodendron 'Birkin'","sunlight":"medium","watering_days":7,"source":"curated-researched","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"ZZ Plant","scientific_name":"Zamioculcas zamiifolia","sunlight":"low-medium","watering_days":14,"source":"curated-researched","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Rosemary","scientific_name":"Salvia rosmarinus","sunlight":"high","watering_days":7,"source":"curated-researched","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Apple (dwarf, potted)","scientific_name":"Malus domestica (dwarf/grafted)","sunlight":"high","watering_days":7,"source":"curated-researched","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Monstera deliciosa","scientific_name":"Monstera deliciosa","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Pothos (Golden)","scientific_name":"Epipremnum aureum","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Pothos (Marble Queen)","scientific_name":"Epipremnum aureum 'Marble Queen'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Pothos (Neon)","scientific_name":"Epipremnum aureum 'Neon'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Snake Plant","scientific_name":"Dracaena trifasciata","sunlight":"low","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Peace Lily","scientific_name":"Spathiphyllum wallisii","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Spider Plant","scientific_name":"Chlorophytum comosum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Fiddle Leaf Fig","scientific_name":"Ficus lyrata","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"difficult","placement":"indoor"},{"common_name":"Rubber Plant","scientific_name":"Ficus elastica","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Boston Fern","scientific_name":"Nephrolepis exaltata","sunlight":"medium","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"English Ivy","scientific_name":"Hedera helix","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Aloe Vera","scientific_name":"Aloe vera","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Jade Plant","scientific_name":"Crassula ovata","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"String of Pearls","scientific_name":"Curio rowleyanus","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea Ornata","scientific_name":"Calathea ornata","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea Medallion","scientific_name":"Calathea veitchiana","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea Rattlesnake","scientific_name":"Calathea lancifolia","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Heartleaf","scientific_name":"Philodendron hederaceum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Money Tree","scientific_name":"Pachira aquatica","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Bird of Paradise","scientific_name":"Strelitzia reginae","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Peperomia Obtusifolia","scientific_name":"Peperomia obtusifolia","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Peperomia Caperata","scientific_name":"Peperomia caperata","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Peperomia Watermelon","scientific_name":"Peperomia argyreia","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Dracaena Marginata","scientific_name":"Dracaena marginata","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Dracaena Fragrans (Corn Plant)","scientific_name":"Dracaena fragrans","sunlight":"low","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Chinese Evergreen","scientific_name":"Aglaonema commutatum","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Areca Palm","scientific_name":"Dypsis lutescens","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"Parlor Palm","scientific_name":"Chamaedorea elegans","sunlight":"low","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Anthurium","scientific_name":"Anthurium andraeanum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Begonia Rex","scientific_name":"Begonia rex","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Begonia Wax","scientific_name":"Begonia x semperflorens-cultorum","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"African Violet","scientific_name":"Streptocarpus sect. Saintpaulia","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Phalaenopsis Orchid","scientific_name":"Phalaenopsis sp.","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Dendrobium Orchid","scientific_name":"Dendrobium sp.","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Echeveria","scientific_name":"Echeveria sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Barrel Cactus","scientific_name":"Ferocactus sp.","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Lavender","scientific_name":"Lavandula angustifolia","sunlight":"high","watering_days":10,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Mint","scientific_name":"Mentha sp.","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Basil","scientific_name":"Ocimum basilicum","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Thyme","scientific_name":"Thymus vulgaris","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Tomato","scientific_name":"Solanum lycopersicum","sunlight":"high","watering_days":2,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Marigold","scientific_name":"Tagetes sp.","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Sunflower","scientific_name":"Helianthus annuus","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Tulip","scientific_name":"Tulipa sp.","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Lucky Bamboo","scientific_name":"Dracaena sanderiana","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Haworthia","scientific_name":"Haworthia sp.","sunlight":"medium","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Gasteria","scientific_name":"Gasteria sp.","sunlight":"medium","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Sedum (Stonecrop)","scientific_name":"Sedum sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"Sempervivum (Hens and Chicks)","scientific_name":"Sempervivum sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"Agave","scientific_name":"Agave sp.","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"String of Hearts","scientific_name":"Ceropegia woodii","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"String of Dolphins","scientific_name":"Curio x peregrinus","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"String of Bananas","scientific_name":"Curio radicans","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Burro's Tail","scientific_name":"Sedum morganianum","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"Panda Plant","scientific_name":"Kalanchoe tomentosa","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Kalanchoe (Flaming Katy)","scientific_name":"Kalanchoe blossfeldiana","sunlight":"medium-high","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Aeonium","scientific_name":"Aeonium sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Aloe Aristata","scientific_name":"Aloe aristata","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Aloe Vera (Soap)","scientific_name":"Aloe vera var. chinensis","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Crassula Perforata","scientific_name":"Crassula perforata","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Opuntia (Prickly Pear)","scientific_name":"Opuntia sp.","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Cereus (Column Cactus)","scientific_name":"Cereus repandus","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Easter Cactus","scientific_name":"Hatiora gaertneri","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Christmas Cactus","scientific_name":"Schlumbergera bridgesii","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Thanksgiving Cactus","scientific_name":"Schlumbergera truncata","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Moon Cactus","scientific_name":"Gymnocalycium mihanovichii","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Pencil Cactus","scientific_name":"Euphorbia tirucalli","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Crown of Thorns","scientific_name":"Euphorbia milii","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Maidenhair Fern","scientific_name":"Adiantum sp.","sunlight":"medium","watering_days":2,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"indoor"},{"common_name":"Bird's Nest Fern","scientific_name":"Asplenium nidus","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Staghorn Fern","scientific_name":"Platycerium bifurcatum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Kimberly Queen Fern","scientific_name":"Nephrolepis obliterata","sunlight":"medium","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Autumn Fern","scientific_name":"Dryopteris erythrosora","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Sword Fern","scientific_name":"Polystichum munitum","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Button Fern","scientific_name":"Pellaea rotundifolia","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Asparagus Fern","scientific_name":"Asparagus setaceus","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Brasil","scientific_name":"Philodendron hederaceum 'Brasil'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Pink Princess","scientific_name":"Philodendron erubescens 'Pink Princess'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Gloriosum","scientific_name":"Philodendron gloriosum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Xanadu","scientific_name":"Thaumatophyllum xanadu","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Selloum","scientific_name":"Thaumatophyllum bipinnatifidum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Moonlight","scientific_name":"Philodendron 'Moonlight'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Monstera Adansonii (Swiss Cheese)","scientific_name":"Monstera adansonii","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Monstera Thai Constellation","scientific_name":"Monstera deliciosa 'Thai Constellation'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Pothos (Silver/Satin)","scientific_name":"Scindapsus pictus","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Alocasia Polly (African Mask)","scientific_name":"Alocasia × amazonica 'Polly'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Alocasia Zebrina","scientific_name":"Alocasia zebrina","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Alocasia Macrorrhiza (Giant Taro)","scientific_name":"Alocasia macrorrhizos","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Colocasia (Taro)","scientific_name":"Colocasia esculenta","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"both"},{"common_name":"Dieffenbachia (Dumb Cane)","scientific_name":"Dieffenbachia seguine","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Caladium","scientific_name":"Caladium bicolor","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Spathiphyllum Sensation","scientific_name":"Spathiphyllum 'Sensation'","sunlight":"low","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Syngonium (Arrowhead)","scientific_name":"Syngonium podophyllum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Syngonium Albo Variegatum","scientific_name":"Syngonium podophyllum 'Albo Variegatum'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Rhaphidophora Tetrasperma (Mini Monstera)","scientific_name":"Rhaphidophora tetrasperma","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Zamioculcas Zamifolia Raven","scientific_name":"Zamioculcas zamiifolia 'Raven'","sunlight":"low","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Prayer Plant","scientific_name":"Maranta leuconeura","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea Zebrina","scientific_name":"Calathea zebrina","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea Roseopicta","scientific_name":"Calathea roseopicta","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea Makoyana (Peacock Plant)","scientific_name":"Calathea makoyana","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Ctenanthe Setosa","scientific_name":"Ctenanthe setosa","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Stromanthe Triostar","scientific_name":"Stromanthe thalia 'Triostar'","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Goeppertia Orbifolia","scientific_name":"Goeppertia orbifolia","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Kentia Palm","scientific_name":"Howea forsteriana","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Majesty Palm","scientific_name":"Ravenea rivularis","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Ponytail Palm","scientific_name":"Beaucarnea recurvata","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Pygmy Date Palm","scientific_name":"Phoenix roebelenii","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Rhapis Palm (Lady Palm)","scientific_name":"Rhapis excelsa","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Windmill Palm","scientific_name":"Trachycarpus fortunei","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Sago Palm","scientific_name":"Cycas revoluta","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Weeping Fig","scientific_name":"Ficus benjamina","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Ficus Audrey","scientific_name":"Ficus benghalensis","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Creeping Fig","scientific_name":"Ficus pumila","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Indian Rubber Tree","scientific_name":"Ficus elastica 'Burgundy'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Dracaena Warneckii","scientific_name":"Dracaena deremensis 'Warneckii'","sunlight":"low","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Dracaena Lemon Lime","scientific_name":"Dracaena fragrans 'Lemon Lime'","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Dracaena Compacta","scientific_name":"Dracaena fragrans 'Compacta'","sunlight":"low","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Dracaena Song of India","scientific_name":"Dracaena reflexa 'Song of India'","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Parsley","scientific_name":"Petroselinum crispum","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Cilantro (Coriander)","scientific_name":"Coriandrum sativum","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Chives","scientific_name":"Allium schoenoprasum","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Oregano","scientific_name":"Origanum vulgare","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Sage","scientific_name":"Salvia officinalis","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Lemon Balm","scientific_name":"Melissa officinalis","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Tarragon","scientific_name":"Artemisia dracunculus","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Dill","scientific_name":"Anethum graveolens","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Fennel","scientific_name":"Foeniculum vulgare","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Stevia","scientific_name":"Stevia rebaudiana","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Bay Laurel","scientific_name":"Laurus nobilis","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Lemongrass","scientific_name":"Cymbopogon citratus","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Curry Leaf","scientific_name":"Murraya koenigii","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Peppermint","scientific_name":"Mentha × piperita","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Spearmint","scientific_name":"Mentha spicata","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Geranium","scientific_name":"Pelargonium sp.","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Impatiens","scientific_name":"Impatiens walleriana","sunlight":"medium","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Pansy","scientific_name":"Viola × wittrockiana","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Petunia","scientific_name":"Petunia sp.","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Zinnia","scientific_name":"Zinnia elegans","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Dahlia","scientific_name":"Dahlia pinnata","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Chrysanthemum","scientific_name":"Chrysanthemum morifolium","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Lily (Asiatic)","scientific_name":"Lilium asiaticum","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Lily (Peace)","scientific_name":"Spathiphyllum sp.","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Jasmine (Night)","scientific_name":"Cestrum nocturnum","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Bougainvillea","scientific_name":"Bougainvillea glabra","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Ixora","scientific_name":"Ixora coccinea","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Plumeria (Frangipani)","scientific_name":"Plumeria rubra","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Heliconia","scientific_name":"Heliconia sp.","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Ginger (Ornamental)","scientific_name":"Hedychium sp.","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Bird of Paradise (White)","scientific_name":"Strelitzia nicolai","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Torch Lily (Red Hot Poker)","scientific_name":"Kniphofia uvaria","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Amaryllis","scientific_name":"Hippeastrum sp.","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"both"},{"common_name":"Cyclamen","scientific_name":"Cyclamen persicum","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Poinsettia","scientific_name":"Euphorbia pulcherrima","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"both"},{"common_name":"Bromeliad (Guzmania)","scientific_name":"Guzmania lingulata","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Bromeliad (Vriesea)","scientific_name":"Vriesea splendens","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Bromeliad (Neoregelia)","scientific_name":"Neoregelia carolinae","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Air Plant (Tillandsia)","scientific_name":"Tillandsia sp.","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Gloxinia","scientific_name":"Sinningia speciosa","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Jasmine (Madagascar)","scientific_name":"Stephanotis floribunda","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Wisteria","scientific_name":"Wisteria sinensis","sunlight":"high","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Hoya (Wax Plant)","scientific_name":"Hoya carnosa","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Hoya Kerrii (Sweetheart)","scientific_name":"Hoya kerrii","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Hoya Pubicalyx","scientific_name":"Hoya pubicalyx","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Tradescantia (Spiderwort)","scientific_name":"Tradescantia zebrina","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Tradescantia Fluminensis","scientific_name":"Tradescantia fluminensis","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Inch Plant (Purple Queen)","scientific_name":"Tradescantia pallida","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Mandevilla","scientific_name":"Mandevilla sanderi","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Passionflower","scientific_name":"Passiflora incarnata","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Morning Glory","scientific_name":"Ipomoea purpurea","sunlight":"high","watering_days":3,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Sweet Potato Vine","scientific_name":"Ipomoea batatas","sunlight":"high","watering_days":3,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Meyer Lemon","scientific_name":"Citrus × meyeri","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Kumquat","scientific_name":"Citrus japonica","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Calamondin Orange","scientific_name":"Citrofortunella microcarpa","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Olive Tree (Potted)","scientific_name":"Olea europaea","sunlight":"high","watering_days":10,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Dwarf Banana","scientific_name":"Musa acuminata 'Dwarf Cavendish'","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Avocado (Potted)","scientific_name":"Persea americana","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Fig (Edible)","scientific_name":"Ficus carica","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Pomegranate (Potted)","scientific_name":"Punica granatum","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Gardenia","scientific_name":"Gardenia jasminoides","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"both"},{"common_name":"Azalea","scientific_name":"Rhododendron sp.","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"both"},{"common_name":"Camellia","scientific_name":"Camellia japonica","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Bonsai Juniper","scientific_name":"Juniperus sp.","sunlight":"high","watering_days":3,"source":"curated","toxicity":"toxic-pets","care_level":"difficult","placement":"outdoor"},{"common_name":"Bonsai Ficus","scientific_name":"Ficus retusa","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"difficult","placement":"indoor"},{"common_name":"Bonsai Maple","scientific_name":"Acer palmatum","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"outdoor"},{"common_name":"Schefflera (Umbrella Tree)","scientific_name":"Schefflera actinophylla","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Schefflera Arboricola (Dwarf)","scientific_name":"Schefflera arboricola","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Croton Mammy","scientific_name":"Codiaeum variegatum 'Mammy'","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Pepper (Bell)","scientific_name":"Capsicum annuum","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Pepper (Chili)","scientific_name":"Capsicum frutescens","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Eggplant","scientific_name":"Solanum melongena","sunlight":"high","watering_days":3,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Cucumber (Potted)","scientific_name":"Cucumis sativus","sunlight":"high","watering_days":2,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Zucchini (Potted)","scientific_name":"Cucurbita pepo","sunlight":"high","watering_days":2,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Strawberry (Potted)","scientific_name":"Fragaria × ananassa","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Lettuce (Container)","scientific_name":"Lactuca sativa","sunlight":"medium-high","watering_days":2,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Spinach (Container)","scientific_name":"Spinacia oleracea","sunlight":"medium-high","watering_days":2,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Kale (Container)","scientific_name":"Brassica oleracea var. acephala","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Radish (Container)","scientific_name":"Raphanus sativus","sunlight":"high","watering_days":2,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Green Onion / Scallion","scientific_name":"Allium fistulosum","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Garlic (Potted)","scientific_name":"Allium sativum","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Bamboo (Clumping)","scientific_name":"Bambusa sp.","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Bamboo (Running)","scientific_name":"Phyllostachys sp.","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Fountain Grass","scientific_name":"Pennisetum setaceum","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Blue Fescue","scientific_name":"Festuca glauca","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Japanese Forest Grass","scientific_name":"Hakonechloa macra","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Papyrus","scientific_name":"Cyperus papyrus","sunlight":"high","watering_days":2,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Umbrella Plant","scientific_name":"Cyperus alternifolius","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Calla Lily","scientific_name":"Zantedeschia aethiopica","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"both"},{"common_name":"Cannas","scientific_name":"Canna indica","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Begonia Tuberhybrida","scientific_name":"Begonia × tuberhybrida","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Hyacinth","scientific_name":"Hyacinthus orientalis","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Daffodil","scientific_name":"Narcissus sp.","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"outdoor"},{"common_name":"Crocus","scientific_name":"Crocus sp.","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Lotus (Potted)","scientific_name":"Nelumbo nucifera","sunlight":"high","watering_days":1,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Water Lily (Mini)","scientific_name":"Nymphaea sp.","sunlight":"high","watering_days":1,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Nerve Plant","scientific_name":"Fittonia albivenis","sunlight":"low","watering_days":3,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"indoor"},{"common_name":"Cast Iron Plant","scientific_name":"Aspidistra elatior","sunlight":"low","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Copper Spoons","scientific_name":"Kalanchoe orgyalis","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Purple Waffle Plant","scientific_name":"Hemigraphis alternata","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Polka Dot Plant","scientific_name":"Hypoestes phyllostachya","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Pillow Cactus (Astrophytum)","scientific_name":"Astrophytum myriostigma","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Lithops (Living Stones)","scientific_name":"Lithops sp.","sunlight":"high","watering_days":30,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Elephant Bush","scientific_name":"Portulacaria afra","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Ghost Plant","scientific_name":"Graptopetalum paraguayense","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Tiger Aloe","scientific_name":"Gonialoe variegata","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Desert Rose","scientific_name":"Adenium obesum","sunlight":"high","watering_days":10,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Plectranthus (Swedish Ivy)","scientific_name":"Plectranthus australis","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Columnea (Goldfish Plant)","scientific_name":"Columnea sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Episcia (Flame Violet)","scientific_name":"Episcia cupreata","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Oxalis (Shamrock Plant)","scientific_name":"Oxalis triangularis","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Chlorophytum Comosum 'Variegatum'","scientific_name":"Chlorophytum comosum 'Variegatum'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Gynura (Purple Passion)","scientific_name":"Gynura aurantiaca","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Pothos (Cebu Blue)","scientific_name":"Epipremnum pinnatum 'Cebu Blue'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Monstera Standleyana","scientific_name":"Monstera standleyana","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Anthurium Clarinervium","scientific_name":"Anthurium clarinervium","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Anthurium Veitchii","scientific_name":"Anthurium veitchii","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Mamei","scientific_name":"Philodendron mamei","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron Florida Ghost","scientific_name":"Philodendron × Florida Ghost","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Epipremnum Amplissimum","scientific_name":"Epipremnum amplissimum","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Scindapsus Treubii Moonlight","scientific_name":"Scindapsus treubii 'Moonlight'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Scindapsus Pictus Exotica","scientific_name":"Scindapsus pictus 'Exotica'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Aloe Barbadensis","scientific_name":"Aloe barbadensis Miller","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"String of Nickels","scientific_name":"Dischidia nummularia","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Hindu Rope Plant","scientific_name":"Hoya carnosa 'Compacta'","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Cotyledon Tomentosa (Bear's Paw)","scientific_name":"Cotyledon tomentosa","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Adromischus Cristatus (Crinkle Leaf)","scientific_name":"Adromischus cristatus","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Titanopsis (Jewel Plant)","scientific_name":"Titanopsis calcarea","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Pleiospilos Nelii (Split Rock)","scientific_name":"Pleiospilos nelii","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Dudleya (Chalk Liveforever)","scientific_name":"Dudleya pulverulenta","sunlight":"high","watering_days":21,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Crassula Muscosa (Watch Chain)","scientific_name":"Crassula muscosa","sunlight":"high","watering_days":14,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Haworthiopsis Attenuata (Zebra Plant)","scientific_name":"Haworthiopsis attenuata","sunlight":"medium","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Gasteria Carinata","scientific_name":"Gasteria carinata","sunlight":"medium","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Yucca (Indoor)","scientific_name":"Yucca elephantipes","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"Yucca (Outdoor)","scientific_name":"Yucca filamentosa","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"easy","placement":"both"},{"common_name":"Mammillaria (Pincushion Cactus)","scientific_name":"Mammillaria sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Echinocereus (Hedgehog Cactus)","scientific_name":"Echinocereus sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Echinopsis (Easter Lily Cactus)","scientific_name":"Echinopsis sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Notocactus (Ball Cactus)","scientific_name":"Notocactus sp.","sunlight":"high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Gymnocalycium (Chin Cactus)","scientific_name":"Gymnocalycium sp.","sunlight":"medium-high","watering_days":14,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Traveler's Palm","scientific_name":"Ravenala madagascariensis","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Elephant Ear (Black Magic)","scientific_name":"Colocasia esculenta 'Black Magic'","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"both"},{"common_name":"Philodendron Prince of Orange","scientific_name":"Philodendron 'Prince of Orange'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Philodendron McColley's Finale","scientific_name":"Philodendron 'McColley's Finale'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Calathea White Fusion","scientific_name":"Calathea 'White Fusion'","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"indoor"},{"common_name":"Calathea Corona","scientific_name":"Calathea 'Corona'","sunlight":"low","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Aglaonema Red Siam","scientific_name":"Aglaonema 'Red Siam'","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Aglaonema Silver Bay","scientific_name":"Aglaonema 'Silver Bay'","sunlight":"low","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Aglaonema Pink Anyamanee","scientific_name":"Aglaonema 'Pink Anyamanee'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Alocasia Dragon Scale","scientific_name":"Alocasia baginda 'Dragon Scale'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Alocasia Silver Dragon","scientific_name":"Alocasia baginda 'Silver Dragon'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Alocasia Cuprea (Mirror Plant)","scientific_name":"Alocasia cuprea","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"indoor"},{"common_name":"Begonia Maculata (Polka Dot)","scientific_name":"Begonia maculata","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Begonia Brevirimosa (Jewel Orchid)","scientific_name":"Begonia brevirimosa","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Jewel Orchid (Ludisia)","scientific_name":"Ludisia discolor","sunlight":"low","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Peperomia Hope","scientific_name":"Peperomia rotundifolia","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Peperomia Polybotrya (Raindrop)","scientific_name":"Peperomia polybotrya","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Peperomia Rosso","scientific_name":"Peperomia caperata 'Rosso'","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Peperomia Metallica","scientific_name":"Peperomia metallica","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Peperomia Rana Verde","scientific_name":"Peperomia rotundifolia 'Rana Verde'","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Rubber Tree (Tineke)","scientific_name":"Ficus elastica 'Tineke'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Rubber Tree (Ruby)","scientific_name":"Ficus elastica 'Ruby'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Fiddle Leaf Fig (Bambino)","scientific_name":"Ficus lyrata 'Bambino'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"difficult","placement":"indoor"},{"common_name":"Weeping Fig (Variegated)","scientific_name":"Ficus benjamina 'Variegata'","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"Song of Jamaica","scientific_name":"Dracaena reflexa","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Janet Craig Dracaena","scientific_name":"Dracaena fragrans 'Janet Craig'","sunlight":"low","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Pleomele (Malaysian Dracaena)","scientific_name":"Dracaena reflexa var. angustifolia","sunlight":"medium","watering_days":10,"source":"curated","toxicity":"toxic-pets","care_level":"easy","placement":"indoor"},{"common_name":"Chamaedorea Seifrizii (Bamboo Palm)","scientific_name":"Chamaedorea seifrizii","sunlight":"low","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Lavender (French)","scientific_name":"Lavandula stoechas","sunlight":"high","watering_days":10,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Rosemary (Creeping)","scientific_name":"Salvia rosmarinus 'Prostratus'","sunlight":"high","watering_days":10,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Catmint","scientific_name":"Nepeta × faassenii","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Black-eyed Susan","scientific_name":"Rudbeckia hirta","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Coneflower (Echinacea)","scientific_name":"Echinacea purpurea","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Salvia (Garden)","scientific_name":"Salvia splendens","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Lantana","scientific_name":"Lantana camara","sunlight":"high","watering_days":5,"source":"curated","toxicity":"toxic-all","care_level":"moderate","placement":"outdoor"},{"common_name":"Vinca (Periwinkle)","scientific_name":"Catharanthus roseus","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Portulaca (Moss Rose)","scientific_name":"Portulaca grandiflora","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Cosmos","scientific_name":"Cosmos bipinnatus","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Snapdragon","scientific_name":"Antirrhinum majus","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Stock Flower","scientific_name":"Matthiola incana","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Verbena","scientific_name":"Verbena × hybrida","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Celosia (Cockscomb)","scientific_name":"Celosia argentea","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Ti Plant (Hawaiian)","scientific_name":"Cordyline fruticosa","sunlight":"medium-high","watering_days":7,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"indoor"},{"common_name":"New Zealand Flax","scientific_name":"Phormium tenax","sunlight":"high","watering_days":7,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Heliconia Bihai","scientific_name":"Heliconia bihai","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Costus (Spiral Ginger)","scientific_name":"Costus sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Kaempferia (Peacock Ginger)","scientific_name":"Kaempferia sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Alpinia (Shell Ginger)","scientific_name":"Alpinia zerumbet","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Curcuma (Hidden Lily)","scientific_name":"Curcuma sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Glorybower (Bleeding Heart Vine)","scientific_name":"Clerodendrum thomsoniae","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"toxic-pets","care_level":"moderate","placement":"both"},{"common_name":"Shrimp Plant","scientific_name":"Justicia brandegeeana","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Jacobinia (Brazilian Plume)","scientific_name":"Justicia carnea","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Crossandra (Firecracker Flower)","scientific_name":"Crossandra infundibuliformis","sunlight":"medium-high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Ruellia (Mexican Petunia)","scientific_name":"Ruellia simplex","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"outdoor"},{"common_name":"Venus Flytrap","scientific_name":"Dionaea muscipula","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"outdoor"},{"common_name":"Pitcher Plant (Sarracenia)","scientific_name":"Sarracenia sp.","sunlight":"high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"outdoor"},{"common_name":"Sundew (Drosera)","scientific_name":"Drosera sp.","sunlight":"medium-high","watering_days":3,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"both"},{"common_name":"Tropical Pitcher (Nepenthes)","scientific_name":"Nepenthes sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"indoor"},{"common_name":"Butterwort (Pinguicula)","scientific_name":"Pinguicula sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Miniature Orchid","scientific_name":"Lepanthes sp.","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"difficult","placement":"indoor"},{"common_name":"Moss (Sheet/Cushion)","scientific_name":"Hypnum sp.","sunlight":"low","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Baby Tears","scientific_name":"Soleirolia soleirolii","sunlight":"medium","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"indoor"},{"common_name":"Corsican Mint","scientific_name":"Mentha requienii","sunlight":"medium","watering_days":3,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Creeping Thyme","scientific_name":"Thymus serpyllum","sunlight":"high","watering_days":5,"source":"curated","toxicity":"safe","care_level":"moderate","placement":"both"},{"common_name":"Artillery Plant","scientific_name":"Pilea microphylla","sunlight":"medium","watering_days":5,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Pilea Peperomioides (Chinese Money)","scientific_name":"Pilea peperomioides","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Pilea Cadierei (Aluminum Plant)","scientific_name":"Pilea cadierei","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"},{"common_name":"Pilea Moon Valley","scientific_name":"Pilea mollis 'Moon Valley'","sunlight":"medium","watering_days":7,"source":"curated","toxicity":"safe","care_level":"easy","placement":"indoor"}];
+
+// ── Storage ───────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'plant-tracker-data';
+let plants = [];
+let _storageOk = true;
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    plants = raw ? JSON.parse(raw) : [];
+  } catch(e) { _storageOk = false; plants = []; }
+}
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+    _storageOk = true;
+  } catch(e) {
+    _storageOk = false;
+  }
+}
+function genId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+// ── Date helpers ──────────────────────────────────────────────────────────
+function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
+function daysBetween(a, b) {
+  // a, b are 'YYYY-MM-DD' strings; returns b - a in days
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+function formatDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+}
+
+// ── Status calculation ────────────────────────────────────────────────────
+function getStatus(plant) {
+  if (!plant.last_watered) return { cls:'status-red', label:'Never watered', daysSince: Infinity };
+  const daysSince = daysBetween(plant.last_watered, todayStr());
+  const threshold = plant.watering_days || 7;
+  if (daysSince <= threshold - 2) return { cls:'status-green', label:`Watered ${daysSince === 0 ? 'today' : daysSince + 'd ago'}`, daysSince };
+  if (daysSince <= threshold) return { cls:'status-yellow', label:`Due in ${threshold - daysSince}d`, daysSince };
+  const over = daysSince - threshold;
+  return { cls:'status-red', label:`Overdue by ${over}d`, daysSince };
+}
+
+// ── Sunlight helpers ──────────────────────────────────────────────────────
+const SUN_ICONS = {
+  'low': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="sun-low"><circle cx="12" cy="12" r="5"/></svg>',
+  'medium': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="sun-medium"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+  'medium-high': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="sun-medium-high"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+  'high': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="sun-high"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+};
+const SUN_LABELS = { 'low':'Low light', 'medium':'Medium', 'medium-high':'Med-High', 'high':'Full sun' };
+
+function sunTag(sunlight) {
+  const icon = SUN_ICONS[sunlight] || SUN_ICONS['medium'];
+  const label = SUN_LABELS[sunlight] || sunlight;
+  return `<span class="sunlight-tag">${icon} ${label}</span>`;
+}
+function toxicTag(t) {
+  if (!t || t === 'safe') return '';
+  if (t === 'toxic-pets') return `<span class="tag-toxic-pets">🐾 Toxic to pets</span>`;
+  return `<span class="tag-toxic-all">⚠ Toxic</span>`;
+}
+function careTag(c) {
+  if (!c) return '';
+  const icons = {easy:'🌿', moderate:'🌱', difficult:'🔆'};
+  return `<span class="tag-care">${icons[c]||''} ${c.charAt(0).toUpperCase()+c.slice(1)}</span>`;
+}
+function placementTag(p) {
+  if (!p) return '';
+  const labels = {indoor:'🏠 Indoor', outdoor:'🌳 Outdoor', both:'🏠🌳 Both'};
+  return labels[p] ? `<span class="tag-placement">${labels[p]}</span>` : '';
+}
+
+// ── Progress & summary helpers ────────────────────────────────────────────
+function progressPct(plant) {
+  if (!plant.last_watered) return 100;
+  const daysSince = daysBetween(plant.last_watered, todayStr());
+  return Math.min(Math.round(daysSince / (plant.watering_days || 7) * 100), 100);
+}
+
+function renderSummary() {
+  const el = document.getElementById('summary-strip');
+  if (!el) return;
+  if (!plants.length) { el.style.display = 'none'; return; }
+  const overdue = plants.filter(p => getStatus(p).cls === 'status-red').length;
+  const soon    = plants.filter(p => getStatus(p).cls === 'status-yellow').length;
+  const good    = plants.filter(p => getStatus(p).cls === 'status-green').length;
+  el.style.display = 'grid';
+  el.innerHTML =
+    `<div class="summary-chip chip-red"><div class="num">${overdue}</div><div class="lbl">Overdue</div></div>` +
+    `<div class="summary-chip chip-yellow"><div class="num">${soon}</div><div class="lbl">Due soon</div></div>` +
+    `<div class="summary-chip chip-green"><div class="num">${good}</div><div class="lbl">On track</div></div>`;
+}
+
+// ── Render dashboard ─────────────────────────────────────────────────────
+let _filter = 'all';
+
+function setFilter(f) {
+  _filter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase().includes(f) || (f === 'all' && b.textContent.trim() === 'All'));
+  });
+  renderDashboard();
+}
+
+function renderDashboard() {
+  renderSummary();
+  const list = document.getElementById('plant-list');
+  const empty = document.getElementById('dashboard-empty');
+
+  if (!plants.length) {
+    list.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // Sort most overdue first
+  const sorted = [...plants].sort((a, b) => {
+    const sa = getStatus(a), sb = getStatus(b);
+    const score = s => s.cls === 'status-red' ? 2 : s.cls === 'status-yellow' ? 1 : 0;
+    const diff = score(sb) - score(sa);
+    if (diff !== 0) return diff;
+    return (sb.daysSince||0) - (sa.daysSince||0);
+  });
+
+  // Filter by placement; plants without placement (manually added) always show
+  const visible = _filter === 'all' ? sorted : sorted.filter(p => {
+    const pl = p.placement;
+    if (!pl) return true;
+    return pl === _filter || pl === 'both';
+  });
+
+  list.innerHTML = visible.map(p => renderCard(p)).join('');
+}
+
+function renderCard(plant) {
+  const status = getStatus(plant);
+  const pct = progressPct(plant);
+  const isOpen = window._openCards && window._openCards.has(plant.id);
+  return `<div class="plant-card ${status.cls}" id="card-${plant.id}">
+    <div class="card-header" onclick="toggleCard('${plant.id}')">
+      <div class="card-status-bar"></div>
+      <div class="card-info">
+        <div class="card-name">${esc(plant.name)}</div>
+        ${plant.species ? `<div class="card-species">${esc(plant.species)}</div>` : ''}
+        <div class="card-meta">
+          ${sunTag(plant.sunlight || 'medium')}
+          <span class="water-status">${status.label}</span>
+          ${toxicTag(plant.toxicity)}
+          ${careTag(plant.care_level)}
+        </div>
+        <div class="water-progress"><div class="water-progress-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-water" onclick="waterNow(event,'${plant.id}')" title="Water now">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 9 2 13a10 10 0 0 0 20 0c0-4-4.48-11-10-11z"/></svg>
+          Water
+        </button>
+        <button class="btn-expand ${isOpen ? 'open' : ''}" onclick="toggleCard('${plant.id}')" title="Details">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-body ${isOpen ? 'open' : ''}" id="body-${plant.id}">
+      ${renderCardBody(plant)}
+    </div>
+  </div>`;
+}
+
+function renderCardBody(plant) {
+  const logItems = (plant.log || []).slice().reverse().map(e =>
+    `<li><span class="log-date">${formatDate(e.date)}</span><span class="log-note">${esc(e.note||'')}</span></li>`
+  ).join('');
+
+  const tox = plant.toxicity;
+  const care = plant.care_level;
+  const place = plant.placement;
+  const placeLabel = place === 'indoor' ? '🏠 Indoor' : place === 'outdoor' ? '🌳 Outdoor' : place === 'both' ? '🏠🌳 Both' : '—';
+
+  return `
+    <div class="card-body-section">
+      <div class="info-grid">
+        <div class="info-cell"><div class="label">Water every</div><div class="value">${plant.watering_days||7} days</div></div>
+        <div class="info-cell"><div class="label">Sunlight</div><div class="value">${SUN_LABELS[plant.sunlight]||plant.sunlight||'Medium'}</div></div>
+        <div class="info-cell"><div class="label">Care level</div><div class="value">${care ? (care.charAt(0).toUpperCase()+care.slice(1)) : '—'}</div></div>
+        <div class="info-cell"><div class="label">Pet safety</div><div class="value">${tox==='safe'?'✓ Pet safe':tox==='toxic-pets'?'⚠ Toxic to pets':tox==='toxic-all'?'⚠ Toxic (all)':'—'}</div></div>
+        <div class="info-cell"><div class="label">Placement</div><div class="value">${placeLabel}</div></div>
+      </div>
+    </div>
+    <div class="card-body-section">
+      <h4>Notes</h4>
+      <textarea id="notes-${plant.id}" class="field-input" rows="2" placeholder="Add a note about this plant…" style="font-size:.85rem;padding:7px 10px;resize:vertical;width:100%">${esc(plant.notes||'')}</textarea>
+      <button class="btn-save-edit" style="margin-top:6px" onclick="saveNotes('${plant.id}')">Save note</button>
+    </div>
+    <div class="card-body-section">
+      <h4>Watering history</h4>
+      ${logItems ? `<ul class="log-list">${logItems}</ul>` : '<p class="log-empty">No watering recorded yet.</p>'}
+    </div>
+    <div class="card-body-section">
+      <h4>Log watering</h4>
+      <div class="note-row">
+        <input type="text" id="note-${plant.id}" class="field-input" placeholder="Optional note…" style="font-size:.85rem;padding:7px 10px">
+        <button class="btn-water" onclick="waterNowNote('${plant.id}')">Log</button>
+      </div>
+    </div>
+    <div class="card-body-section">
+      <h4>Edit details</h4>
+      <div class="edit-grid">
+        <div class="field-row">
+          <label>Name</label>
+          <input type="text" id="edit-name-${plant.id}" value="${esc(plant.name)}" class="field-input" style="font-size:.88rem;padding:7px 10px">
+        </div>
+        <div class="field-row">
+          <label>Species</label>
+          <input type="text" id="edit-species-${plant.id}" value="${esc(plant.species||'')}" class="field-input" style="font-size:.88rem;padding:7px 10px">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="field-row">
+            <label>Sunlight</label>
+            <select id="edit-sun-${plant.id}" class="field-input" style="font-size:.88rem;padding:7px 10px">
+              ${['low','medium','medium-high','high'].map(v=>`<option value="${v}" ${plant.sunlight===v?'selected':''}>${v}</option>`).join('')}
+            </select>
+          </div>
+          <div class="field-row">
+            <label>Water (days)</label>
+            <input type="number" id="edit-days-${plant.id}" value="${plant.watering_days||7}" min="1" max="90" class="field-input" style="font-size:.88rem;padding:7px 10px">
+          </div>
+        </div>
+        <div class="field-row">
+          <label>Last watered</label>
+          <input type="date" id="edit-date-${plant.id}" value="${plant.last_watered||''}" class="field-input" style="font-size:.88rem;padding:7px 10px">
+        </div>
+      </div>
+      <div class="card-actions-bottom">
+        <button class="btn-save-edit" onclick="saveEdit('${plant.id}')">Save changes</button>
+        <button class="btn-danger" onclick="deletePlant('${plant.id}')">Delete plant</button>
+      </div>
+    </div>
+  `;
+}
+
+// ── Card interactions ─────────────────────────────────────────────────────
+window._openCards = new Set();
+
+function toggleCard(id) {
+  if (_openCards.has(id)) _openCards.delete(id); else _openCards.add(id);
+  renderDashboard();
+}
+
+function waterNow(e, id) {
+  e.stopPropagation();
+  const plant = plants.find(p => p.id === id);
+  if (!plant) return;
+  plant.last_watered = todayStr();
+  plant.log = plant.log || [];
+  plant.log.push({date: todayStr(), note: ''});
+  save();
+  toast('Watered ' + plant.name + ' today!');
+  renderDashboard();
+}
+
+function waterNowNote(id) {
+  const plant = plants.find(p => p.id === id);
+  if (!plant) return;
+  const noteEl = document.getElementById('note-' + id);
+  const note = noteEl ? noteEl.value.trim() : '';
+  plant.last_watered = todayStr();
+  plant.log = plant.log || [];
+  plant.log.push({date: todayStr(), note});
+  save();
+  toast('Logged watering' + (note ? ' with note' : ''));
+  renderDashboard();
+}
+
+function saveEdit(id) {
+  const plant = plants.find(p => p.id === id);
+  if (!plant) return;
+  plant.name = document.getElementById('edit-name-' + id).value.trim() || plant.name;
+  plant.species = document.getElementById('edit-species-' + id).value.trim();
+  plant.sunlight = document.getElementById('edit-sun-' + id).value;
+  plant.watering_days = parseInt(document.getElementById('edit-days-' + id).value) || plant.watering_days;
+  const dateVal = document.getElementById('edit-date-' + id).value;
+  if (dateVal) plant.last_watered = dateVal;
+  save();
+  toast('Plant updated!');
+  renderDashboard();
+}
+
+function saveNotes(id) {
+  const plant = plants.find(p => p.id === id);
+  if (!plant) return;
+  plant.notes = document.getElementById('notes-' + id).value.trim();
+  save();
+  toast('Note saved!');
+}
+
+function deletePlant(id) {
+  if (!confirm('Delete this plant? This cannot be undone.')) return;
+  plants = plants.filter(p => p.id !== id);
+  _openCards.delete(id);
+  save();
+  toast('Plant removed.');
+  renderDashboard();
+}
+
+// ── Add plant ─────────────────────────────────────────────────────────────
+let _matchedDbEntry = null;
+
+function addPlant() {
+  try {
+  const name = document.getElementById('inp-name').value.trim();
+  if (!name) { toast('Please enter a plant name'); return; }
+  const species = document.getElementById('inp-species').value.trim();
+  const sunlight = document.getElementById('inp-sunlight').value;
+  const days = parseInt(document.getElementById('inp-days').value) || 7;
+  const lastWatered = document.getElementById('inp-last-watered').value || todayStr();
+
+  const plant = {
+    id: genId(),
+    name,
+    species,
+    sunlight,
+    watering_days: days,
+    last_watered: lastWatered,
+    log: [{date: lastWatered, note: 'Added to tracker'}],
+    toxicity: _matchedDbEntry ? _matchedDbEntry.toxicity : undefined,
+    care_level: _matchedDbEntry ? _matchedDbEntry.care_level : undefined,
+    placement: _matchedDbEntry ? _matchedDbEntry.placement : undefined,
+  };
+  plants.push(plant);
+  save();
+  if (!_storageOk) document.getElementById('storage-warn').style.display = '';
+  toast(name + ' added!');
+  resetAddForm();
+  showTab('dashboard');
+  } catch(err) { toast('Error: ' + err.message); }
+}
+
+function resetAddForm() {
+  document.getElementById('inp-name').value = '';
+  document.getElementById('inp-species').value = '';
+  document.getElementById('inp-sunlight').value = 'medium';
+  document.getElementById('inp-days').value = '7';
+  document.getElementById('inp-last-watered').value = '';
+  document.getElementById('matched-info').innerHTML = '';
+  const _srReset = document.getElementById('species-results');
+  _srReset.innerHTML = '';
+  _srReset.style.display = 'none';
+  _matchedDbEntry = null;
+}
+
+// ── Species autocomplete ──────────────────────────────────────────────────
+let _currentHits = [];
+
+function normalise(s) {
+  return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function onSpeciesInput(val) {
+  const el = document.getElementById('species-results');
+  const q = val.trim();
+  if (q.length < 2) { el.innerHTML = ''; el.style.display = 'none'; return; }
+  const qn = normalise(q);
+  _currentHits = PLANTS_DB.filter(p =>
+    normalise(p.common_name).includes(qn) ||
+    normalise(p.scientific_name).includes(qn)
+  ).slice(0, 8);
+  if (!_currentHits.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  el.innerHTML = _currentHits.map((p, i) =>
+    `<div class="species-item" onclick="selectSpecies(${i})">`+
+    `<strong>${esc(p.common_name)}</strong>`+
+    `<span>${esc(p.scientific_name)}</span>`+
+    `<span style="display:flex;gap:5px;margin-top:3px;flex-wrap:wrap">${toxicTag(p.toxicity)}${careTag(p.care_level)}${placementTag(p.placement)}</span>`+
+    `</div>`
+  ).join('');
+}
+
+function selectSpecies(i) {
+  const p = _currentHits[i];
+  if (!p) return;
+  _matchedDbEntry = p;
+  document.getElementById('inp-species').value = p.common_name;
+  document.getElementById('inp-sunlight').value = p.sunlight || 'medium';
+  document.getElementById('inp-days').value = p.watering_days || 7;
+  document.getElementById('matched-info').innerHTML =
+    `<span class="matched-badge">✓ Auto-filled from database</span>`;
+  const _sr = document.getElementById('species-results');
+  _sr.innerHTML = '';
+  _sr.style.display = 'none';
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────
+// ── Browse ────────────────────────────────────────────────────────────────
+let _browseTox = 'all', _browseCare = 'all', _browseResults = [];
+
+function setBrowseFilter(type, val) {
+  if (type === 'tox')  _browseTox  = val;
+  if (type === 'care') _browseCare = val;
+  // Update active button in that group
+  const groupId = type === 'tox' ? 'bf-tox' : 'bf-care';
+  document.querySelectorAll('#' + groupId + ' .filter-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes("'" + val + "'"));
+  });
+  renderBrowse();
+}
+
+function renderBrowse() {
+  const q = (document.getElementById('browse-search').value || '').trim();
+  const qn = q.length >= 2 ? normalise(q) : '';
+  _browseResults = PLANTS_DB.filter(p => {
+    if (qn && !normalise(p.common_name).includes(qn) && !normalise(p.scientific_name).includes(qn)) return false;
+    if (_browseTox  !== 'all' && p.toxicity   !== _browseTox)  return false;
+    if (_browseCare !== 'all' && p.care_level !== _browseCare) return false;
+    return true;
+  });
+  const shown = _browseResults.slice(0, 60);
+  document.getElementById('browse-count').textContent =
+    _browseResults.length + ' plant' + (_browseResults.length !== 1 ? 's' : '') +
+    (_browseResults.length > 60 ? ' (showing first 60)' : '');
+  document.getElementById('browse-results').innerHTML = shown.map((p, i) =>
+    `<div class="browse-card">` +
+      `<div class="browse-card-info">` +
+        `<div class="browse-name">${esc(p.common_name)}</div>` +
+        (p.scientific_name ? `<div class="browse-sci">${esc(p.scientific_name)}</div>` : '') +
+        `<div class="browse-tags">${toxicTag(p.toxicity)}${careTag(p.care_level)}${placementTag(p.placement)}</div>` +
+      `</div>` +
+      `<button class="browse-add-btn" onclick="addFromBrowse(${i})">+ Add</button>` +
+    `</div>`
+  ).join('');
+}
+
+function addFromBrowse(idx) {
+  const p = _browseResults[idx];
+  if (!p) return;
+  _matchedDbEntry = p;
+  document.getElementById('inp-species').value = p.common_name;
+  document.getElementById('inp-sunlight').value = p.sunlight || 'medium';
+  document.getElementById('inp-days').value = p.watering_days || 7;
+  document.getElementById('matched-info').innerHTML = `<span class="matched-badge">✓ Auto-filled from database</span>`;
+  const sr = document.getElementById('species-results');
+  sr.innerHTML = ''; sr.style.display = 'none';
+  showTab('add');
+  setTimeout(() => document.getElementById('inp-name').focus(), 80);
+}
+
+function isDesktop() { return window.matchMedia('(min-width:720px)').matches; }
+
+function showTab(tab) {
+  const desktop = isDesktop();
+  // Left-column views: dashboard and browse always toggle
+  document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
+  document.getElementById('view-browse').style.display   = tab === 'browse'    ? '' : 'none';
+  // Add form: always visible on desktop, toggled on mobile
+  document.getElementById('view-add').style.display = (desktop || tab === 'add') ? '' : 'none';
+  ['dashboard','browse','add'].forEach(t => {
+    const b = document.getElementById('tab-' + t);
+    if (b) b.className = t === tab ? 'active' : '';
+  });
+  if (tab === 'dashboard') renderDashboard();
+  if (tab === 'browse') renderBrowse();
+}
+
+window.addEventListener('resize', () => {
+  if (isDesktop()) {
+    document.getElementById('view-add').style.display = '';
+  }
+});
+
+// ── Toast notification ────────────────────────────────────────────────────
+let _toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+// ── Escape HTML ───────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+document.getElementById('js-check').style.display = 'none';
+load();
+if (!_storageOk) document.getElementById('storage-warn').style.display = '';
+renderDashboard();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

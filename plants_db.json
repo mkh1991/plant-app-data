@@ -1,0 +1,3372 @@
+[
+  {
+    "common_name": "Radermachera (China Doll)",
+    "scientific_name": "Radermachera sinica",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Hibiscus",
+    "scientific_name": "Hibiscus rosa-sinensis",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Mimosa pudica (Touch-me-not)",
+    "scientific_name": "Mimosa pudica",
+    "sunlight": "medium",
+    "watering_days": 4,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Frydek",
+    "scientific_name": "Alocasia micholitziana 'Frydek'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Jaaji Mallige (Jasmine)",
+    "scientific_name": "Jasminum grandiflorum",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Suji Mallige (Arabian Jasmine)",
+    "scientific_name": "Jasminum sambac",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Croton",
+    "scientific_name": "Codiaeum variegatum",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Birkin (Philodendron)",
+    "scientific_name": "Philodendron 'Birkin'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "ZZ Plant",
+    "scientific_name": "Zamioculcas zamiifolia",
+    "sunlight": "low-medium",
+    "watering_days": 14,
+    "source": "curated-researched",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Rosemary",
+    "scientific_name": "Salvia rosmarinus",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Apple (dwarf, potted)",
+    "scientific_name": "Malus domestica (dwarf/grafted)",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated-researched",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Monstera deliciosa",
+    "scientific_name": "Monstera deliciosa",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pothos (Golden)",
+    "scientific_name": "Epipremnum aureum",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pothos (Marble Queen)",
+    "scientific_name": "Epipremnum aureum 'Marble Queen'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pothos (Neon)",
+    "scientific_name": "Epipremnum aureum 'Neon'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Snake Plant",
+    "scientific_name": "Dracaena trifasciata",
+    "sunlight": "low",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peace Lily",
+    "scientific_name": "Spathiphyllum wallisii",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Spider Plant",
+    "scientific_name": "Chlorophytum comosum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Fiddle Leaf Fig",
+    "scientific_name": "Ficus lyrata",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Rubber Plant",
+    "scientific_name": "Ficus elastica",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Boston Fern",
+    "scientific_name": "Nephrolepis exaltata",
+    "sunlight": "medium",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "English Ivy",
+    "scientific_name": "Hedera helix",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aloe Vera",
+    "scientific_name": "Aloe vera",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Jade Plant",
+    "scientific_name": "Crassula ovata",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "String of Pearls",
+    "scientific_name": "Curio rowleyanus",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Ornata",
+    "scientific_name": "Calathea ornata",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Medallion",
+    "scientific_name": "Calathea veitchiana",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Rattlesnake",
+    "scientific_name": "Calathea lancifolia",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Heartleaf",
+    "scientific_name": "Philodendron hederaceum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Money Tree",
+    "scientific_name": "Pachira aquatica",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Bird of Paradise",
+    "scientific_name": "Strelitzia reginae",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Peperomia Obtusifolia",
+    "scientific_name": "Peperomia obtusifolia",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Caperata",
+    "scientific_name": "Peperomia caperata",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Watermelon",
+    "scientific_name": "Peperomia argyreia",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dracaena Marginata",
+    "scientific_name": "Dracaena marginata",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dracaena Fragrans (Corn Plant)",
+    "scientific_name": "Dracaena fragrans",
+    "sunlight": "low",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Chinese Evergreen",
+    "scientific_name": "Aglaonema commutatum",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Areca Palm",
+    "scientific_name": "Dypsis lutescens",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "Parlor Palm",
+    "scientific_name": "Chamaedorea elegans",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Anthurium",
+    "scientific_name": "Anthurium andraeanum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Begonia Rex",
+    "scientific_name": "Begonia rex",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Begonia Wax",
+    "scientific_name": "Begonia x semperflorens-cultorum",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "African Violet",
+    "scientific_name": "Streptocarpus sect. Saintpaulia",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Phalaenopsis Orchid",
+    "scientific_name": "Phalaenopsis sp.",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dendrobium Orchid",
+    "scientific_name": "Dendrobium sp.",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Echeveria",
+    "scientific_name": "Echeveria sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Barrel Cactus",
+    "scientific_name": "Ferocactus sp.",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lavender",
+    "scientific_name": "Lavandula angustifolia",
+    "sunlight": "high",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Mint",
+    "scientific_name": "Mentha sp.",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Basil",
+    "scientific_name": "Ocimum basilicum",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Thyme",
+    "scientific_name": "Thymus vulgaris",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Tomato",
+    "scientific_name": "Solanum lycopersicum",
+    "sunlight": "high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Marigold",
+    "scientific_name": "Tagetes sp.",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Sunflower",
+    "scientific_name": "Helianthus annuus",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Tulip",
+    "scientific_name": "Tulipa sp.",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lucky Bamboo",
+    "scientific_name": "Dracaena sanderiana",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Haworthia",
+    "scientific_name": "Haworthia sp.",
+    "sunlight": "medium",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Gasteria",
+    "scientific_name": "Gasteria sp.",
+    "sunlight": "medium",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Sedum (Stonecrop)",
+    "scientific_name": "Sedum sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "Sempervivum (Hens and Chicks)",
+    "scientific_name": "Sempervivum sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "Agave",
+    "scientific_name": "Agave sp.",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "String of Hearts",
+    "scientific_name": "Ceropegia woodii",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "String of Dolphins",
+    "scientific_name": "Curio x peregrinus",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "String of Bananas",
+    "scientific_name": "Curio radicans",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Burro's Tail",
+    "scientific_name": "Sedum morganianum",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "Panda Plant",
+    "scientific_name": "Kalanchoe tomentosa",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Kalanchoe (Flaming Katy)",
+    "scientific_name": "Kalanchoe blossfeldiana",
+    "sunlight": "medium-high",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aeonium",
+    "scientific_name": "Aeonium sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Aloe Aristata",
+    "scientific_name": "Aloe aristata",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aloe Vera (Soap)",
+    "scientific_name": "Aloe vera var. chinensis",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Crassula Perforata",
+    "scientific_name": "Crassula perforata",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Opuntia (Prickly Pear)",
+    "scientific_name": "Opuntia sp.",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Cereus (Column Cactus)",
+    "scientific_name": "Cereus repandus",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Easter Cactus",
+    "scientific_name": "Hatiora gaertneri",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Christmas Cactus",
+    "scientific_name": "Schlumbergera bridgesii",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Thanksgiving Cactus",
+    "scientific_name": "Schlumbergera truncata",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Moon Cactus",
+    "scientific_name": "Gymnocalycium mihanovichii",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Pencil Cactus",
+    "scientific_name": "Euphorbia tirucalli",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Crown of Thorns",
+    "scientific_name": "Euphorbia milii",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Maidenhair Fern",
+    "scientific_name": "Adiantum sp.",
+    "sunlight": "medium",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Bird's Nest Fern",
+    "scientific_name": "Asplenium nidus",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Staghorn Fern",
+    "scientific_name": "Platycerium bifurcatum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Kimberly Queen Fern",
+    "scientific_name": "Nephrolepis obliterata",
+    "sunlight": "medium",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Autumn Fern",
+    "scientific_name": "Dryopteris erythrosora",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Sword Fern",
+    "scientific_name": "Polystichum munitum",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Button Fern",
+    "scientific_name": "Pellaea rotundifolia",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Asparagus Fern",
+    "scientific_name": "Asparagus setaceus",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Brasil",
+    "scientific_name": "Philodendron hederaceum 'Brasil'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Pink Princess",
+    "scientific_name": "Philodendron erubescens 'Pink Princess'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Gloriosum",
+    "scientific_name": "Philodendron gloriosum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Xanadu",
+    "scientific_name": "Thaumatophyllum xanadu",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Selloum",
+    "scientific_name": "Thaumatophyllum bipinnatifidum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Moonlight",
+    "scientific_name": "Philodendron 'Moonlight'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Monstera Adansonii (Swiss Cheese)",
+    "scientific_name": "Monstera adansonii",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Monstera Thai Constellation",
+    "scientific_name": "Monstera deliciosa 'Thai Constellation'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pothos (Silver/Satin)",
+    "scientific_name": "Scindapsus pictus",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Polly (African Mask)",
+    "scientific_name": "Alocasia × amazonica 'Polly'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Zebrina",
+    "scientific_name": "Alocasia zebrina",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Macrorrhiza (Giant Taro)",
+    "scientific_name": "Alocasia macrorrhizos",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Colocasia (Taro)",
+    "scientific_name": "Colocasia esculenta",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Dieffenbachia (Dumb Cane)",
+    "scientific_name": "Dieffenbachia seguine",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Caladium",
+    "scientific_name": "Caladium bicolor",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Spathiphyllum Sensation",
+    "scientific_name": "Spathiphyllum 'Sensation'",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Syngonium (Arrowhead)",
+    "scientific_name": "Syngonium podophyllum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Syngonium Albo Variegatum",
+    "scientific_name": "Syngonium podophyllum 'Albo Variegatum'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Rhaphidophora Tetrasperma (Mini Monstera)",
+    "scientific_name": "Rhaphidophora tetrasperma",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Zamioculcas Zamifolia Raven",
+    "scientific_name": "Zamioculcas zamiifolia 'Raven'",
+    "sunlight": "low",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Prayer Plant",
+    "scientific_name": "Maranta leuconeura",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Zebrina",
+    "scientific_name": "Calathea zebrina",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Roseopicta",
+    "scientific_name": "Calathea roseopicta",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Makoyana (Peacock Plant)",
+    "scientific_name": "Calathea makoyana",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Ctenanthe Setosa",
+    "scientific_name": "Ctenanthe setosa",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Stromanthe Triostar",
+    "scientific_name": "Stromanthe thalia 'Triostar'",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Goeppertia Orbifolia",
+    "scientific_name": "Goeppertia orbifolia",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Kentia Palm",
+    "scientific_name": "Howea forsteriana",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Majesty Palm",
+    "scientific_name": "Ravenea rivularis",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Ponytail Palm",
+    "scientific_name": "Beaucarnea recurvata",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pygmy Date Palm",
+    "scientific_name": "Phoenix roebelenii",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Rhapis Palm (Lady Palm)",
+    "scientific_name": "Rhapis excelsa",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Windmill Palm",
+    "scientific_name": "Trachycarpus fortunei",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Sago Palm",
+    "scientific_name": "Cycas revoluta",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Weeping Fig",
+    "scientific_name": "Ficus benjamina",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Ficus Audrey",
+    "scientific_name": "Ficus benghalensis",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Creeping Fig",
+    "scientific_name": "Ficus pumila",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Indian Rubber Tree",
+    "scientific_name": "Ficus elastica 'Burgundy'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dracaena Warneckii",
+    "scientific_name": "Dracaena deremensis 'Warneckii'",
+    "sunlight": "low",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dracaena Lemon Lime",
+    "scientific_name": "Dracaena fragrans 'Lemon Lime'",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dracaena Compacta",
+    "scientific_name": "Dracaena fragrans 'Compacta'",
+    "sunlight": "low",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Dracaena Song of India",
+    "scientific_name": "Dracaena reflexa 'Song of India'",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Parsley",
+    "scientific_name": "Petroselinum crispum",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Cilantro (Coriander)",
+    "scientific_name": "Coriandrum sativum",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Chives",
+    "scientific_name": "Allium schoenoprasum",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Oregano",
+    "scientific_name": "Origanum vulgare",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Sage",
+    "scientific_name": "Salvia officinalis",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Lemon Balm",
+    "scientific_name": "Melissa officinalis",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Tarragon",
+    "scientific_name": "Artemisia dracunculus",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Dill",
+    "scientific_name": "Anethum graveolens",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Fennel",
+    "scientific_name": "Foeniculum vulgare",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Stevia",
+    "scientific_name": "Stevia rebaudiana",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Bay Laurel",
+    "scientific_name": "Laurus nobilis",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Lemongrass",
+    "scientific_name": "Cymbopogon citratus",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Curry Leaf",
+    "scientific_name": "Murraya koenigii",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Peppermint",
+    "scientific_name": "Mentha × piperita",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Spearmint",
+    "scientific_name": "Mentha spicata",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Geranium",
+    "scientific_name": "Pelargonium sp.",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Impatiens",
+    "scientific_name": "Impatiens walleriana",
+    "sunlight": "medium",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pansy",
+    "scientific_name": "Viola × wittrockiana",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Petunia",
+    "scientific_name": "Petunia sp.",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Zinnia",
+    "scientific_name": "Zinnia elegans",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Dahlia",
+    "scientific_name": "Dahlia pinnata",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Chrysanthemum",
+    "scientific_name": "Chrysanthemum morifolium",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lily (Asiatic)",
+    "scientific_name": "Lilium asiaticum",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lily (Peace)",
+    "scientific_name": "Spathiphyllum sp.",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Jasmine (Night)",
+    "scientific_name": "Cestrum nocturnum",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Bougainvillea",
+    "scientific_name": "Bougainvillea glabra",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Ixora",
+    "scientific_name": "Ixora coccinea",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Plumeria (Frangipani)",
+    "scientific_name": "Plumeria rubra",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Heliconia",
+    "scientific_name": "Heliconia sp.",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Ginger (Ornamental)",
+    "scientific_name": "Hedychium sp.",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Bird of Paradise (White)",
+    "scientific_name": "Strelitzia nicolai",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Torch Lily (Red Hot Poker)",
+    "scientific_name": "Kniphofia uvaria",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Amaryllis",
+    "scientific_name": "Hippeastrum sp.",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Cyclamen",
+    "scientific_name": "Cyclamen persicum",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Poinsettia",
+    "scientific_name": "Euphorbia pulcherrima",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Bromeliad (Guzmania)",
+    "scientific_name": "Guzmania lingulata",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Bromeliad (Vriesea)",
+    "scientific_name": "Vriesea splendens",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Bromeliad (Neoregelia)",
+    "scientific_name": "Neoregelia carolinae",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Air Plant (Tillandsia)",
+    "scientific_name": "Tillandsia sp.",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Gloxinia",
+    "scientific_name": "Sinningia speciosa",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Jasmine (Madagascar)",
+    "scientific_name": "Stephanotis floribunda",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Wisteria",
+    "scientific_name": "Wisteria sinensis",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Hoya (Wax Plant)",
+    "scientific_name": "Hoya carnosa",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Hoya Kerrii (Sweetheart)",
+    "scientific_name": "Hoya kerrii",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Hoya Pubicalyx",
+    "scientific_name": "Hoya pubicalyx",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Tradescantia (Spiderwort)",
+    "scientific_name": "Tradescantia zebrina",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Tradescantia Fluminensis",
+    "scientific_name": "Tradescantia fluminensis",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Inch Plant (Purple Queen)",
+    "scientific_name": "Tradescantia pallida",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Mandevilla",
+    "scientific_name": "Mandevilla sanderi",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Passionflower",
+    "scientific_name": "Passiflora incarnata",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Morning Glory",
+    "scientific_name": "Ipomoea purpurea",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Sweet Potato Vine",
+    "scientific_name": "Ipomoea batatas",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Meyer Lemon",
+    "scientific_name": "Citrus × meyeri",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Kumquat",
+    "scientific_name": "Citrus japonica",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Calamondin Orange",
+    "scientific_name": "Citrofortunella microcarpa",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Olive Tree (Potted)",
+    "scientific_name": "Olea europaea",
+    "sunlight": "high",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Dwarf Banana",
+    "scientific_name": "Musa acuminata 'Dwarf Cavendish'",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Avocado (Potted)",
+    "scientific_name": "Persea americana",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Fig (Edible)",
+    "scientific_name": "Ficus carica",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pomegranate (Potted)",
+    "scientific_name": "Punica granatum",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Gardenia",
+    "scientific_name": "Gardenia jasminoides",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "both"
+  },
+  {
+    "common_name": "Azalea",
+    "scientific_name": "Rhododendron sp.",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Camellia",
+    "scientific_name": "Camellia japonica",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Bonsai Juniper",
+    "scientific_name": "Juniperus sp.",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "difficult",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Bonsai Ficus",
+    "scientific_name": "Ficus retusa",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Bonsai Maple",
+    "scientific_name": "Acer palmatum",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Schefflera (Umbrella Tree)",
+    "scientific_name": "Schefflera actinophylla",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Schefflera Arboricola (Dwarf)",
+    "scientific_name": "Schefflera arboricola",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Croton Mammy",
+    "scientific_name": "Codiaeum variegatum 'Mammy'",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Pepper (Bell)",
+    "scientific_name": "Capsicum annuum",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Pepper (Chili)",
+    "scientific_name": "Capsicum frutescens",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Eggplant",
+    "scientific_name": "Solanum melongena",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Cucumber (Potted)",
+    "scientific_name": "Cucumis sativus",
+    "sunlight": "high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Zucchini (Potted)",
+    "scientific_name": "Cucurbita pepo",
+    "sunlight": "high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Strawberry (Potted)",
+    "scientific_name": "Fragaria × ananassa",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lettuce (Container)",
+    "scientific_name": "Lactuca sativa",
+    "sunlight": "medium-high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Spinach (Container)",
+    "scientific_name": "Spinacia oleracea",
+    "sunlight": "medium-high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Kale (Container)",
+    "scientific_name": "Brassica oleracea var. acephala",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Radish (Container)",
+    "scientific_name": "Raphanus sativus",
+    "sunlight": "high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Green Onion / Scallion",
+    "scientific_name": "Allium fistulosum",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Garlic (Potted)",
+    "scientific_name": "Allium sativum",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Bamboo (Clumping)",
+    "scientific_name": "Bambusa sp.",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Bamboo (Running)",
+    "scientific_name": "Phyllostachys sp.",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Fountain Grass",
+    "scientific_name": "Pennisetum setaceum",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Blue Fescue",
+    "scientific_name": "Festuca glauca",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Japanese Forest Grass",
+    "scientific_name": "Hakonechloa macra",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Papyrus",
+    "scientific_name": "Cyperus papyrus",
+    "sunlight": "high",
+    "watering_days": 2,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Umbrella Plant",
+    "scientific_name": "Cyperus alternifolius",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Calla Lily",
+    "scientific_name": "Zantedeschia aethiopica",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Cannas",
+    "scientific_name": "Canna indica",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Begonia Tuberhybrida",
+    "scientific_name": "Begonia × tuberhybrida",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Hyacinth",
+    "scientific_name": "Hyacinthus orientalis",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Daffodil",
+    "scientific_name": "Narcissus sp.",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Crocus",
+    "scientific_name": "Crocus sp.",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lotus (Potted)",
+    "scientific_name": "Nelumbo nucifera",
+    "sunlight": "high",
+    "watering_days": 1,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Water Lily (Mini)",
+    "scientific_name": "Nymphaea sp.",
+    "sunlight": "high",
+    "watering_days": 1,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Nerve Plant",
+    "scientific_name": "Fittonia albivenis",
+    "sunlight": "low",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Cast Iron Plant",
+    "scientific_name": "Aspidistra elatior",
+    "sunlight": "low",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Copper Spoons",
+    "scientific_name": "Kalanchoe orgyalis",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Purple Waffle Plant",
+    "scientific_name": "Hemigraphis alternata",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Polka Dot Plant",
+    "scientific_name": "Hypoestes phyllostachya",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pillow Cactus (Astrophytum)",
+    "scientific_name": "Astrophytum myriostigma",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Lithops (Living Stones)",
+    "scientific_name": "Lithops sp.",
+    "sunlight": "high",
+    "watering_days": 30,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Elephant Bush",
+    "scientific_name": "Portulacaria afra",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Ghost Plant",
+    "scientific_name": "Graptopetalum paraguayense",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Tiger Aloe",
+    "scientific_name": "Gonialoe variegata",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Desert Rose",
+    "scientific_name": "Adenium obesum",
+    "sunlight": "high",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Plectranthus (Swedish Ivy)",
+    "scientific_name": "Plectranthus australis",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Columnea (Goldfish Plant)",
+    "scientific_name": "Columnea sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Episcia (Flame Violet)",
+    "scientific_name": "Episcia cupreata",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Oxalis (Shamrock Plant)",
+    "scientific_name": "Oxalis triangularis",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Chlorophytum Comosum 'Variegatum'",
+    "scientific_name": "Chlorophytum comosum 'Variegatum'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Gynura (Purple Passion)",
+    "scientific_name": "Gynura aurantiaca",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Pothos (Cebu Blue)",
+    "scientific_name": "Epipremnum pinnatum 'Cebu Blue'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Monstera Standleyana",
+    "scientific_name": "Monstera standleyana",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Anthurium Clarinervium",
+    "scientific_name": "Anthurium clarinervium",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Anthurium Veitchii",
+    "scientific_name": "Anthurium veitchii",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Mamei",
+    "scientific_name": "Philodendron mamei",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron Florida Ghost",
+    "scientific_name": "Philodendron × Florida Ghost",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Epipremnum Amplissimum",
+    "scientific_name": "Epipremnum amplissimum",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Scindapsus Treubii Moonlight",
+    "scientific_name": "Scindapsus treubii 'Moonlight'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Scindapsus Pictus Exotica",
+    "scientific_name": "Scindapsus pictus 'Exotica'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aloe Barbadensis",
+    "scientific_name": "Aloe barbadensis Miller",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "String of Nickels",
+    "scientific_name": "Dischidia nummularia",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Hindu Rope Plant",
+    "scientific_name": "Hoya carnosa 'Compacta'",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Cotyledon Tomentosa (Bear's Paw)",
+    "scientific_name": "Cotyledon tomentosa",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Adromischus Cristatus (Crinkle Leaf)",
+    "scientific_name": "Adromischus cristatus",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Titanopsis (Jewel Plant)",
+    "scientific_name": "Titanopsis calcarea",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Pleiospilos Nelii (Split Rock)",
+    "scientific_name": "Pleiospilos nelii",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Dudleya (Chalk Liveforever)",
+    "scientific_name": "Dudleya pulverulenta",
+    "sunlight": "high",
+    "watering_days": 21,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Crassula Muscosa (Watch Chain)",
+    "scientific_name": "Crassula muscosa",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Haworthiopsis Attenuata (Zebra Plant)",
+    "scientific_name": "Haworthiopsis attenuata",
+    "sunlight": "medium",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Gasteria Carinata",
+    "scientific_name": "Gasteria carinata",
+    "sunlight": "medium",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Yucca (Indoor)",
+    "scientific_name": "Yucca elephantipes",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "Yucca (Outdoor)",
+    "scientific_name": "Yucca filamentosa",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "both"
+  },
+  {
+    "common_name": "Mammillaria (Pincushion Cactus)",
+    "scientific_name": "Mammillaria sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Echinocereus (Hedgehog Cactus)",
+    "scientific_name": "Echinocereus sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Echinopsis (Easter Lily Cactus)",
+    "scientific_name": "Echinopsis sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Notocactus (Ball Cactus)",
+    "scientific_name": "Notocactus sp.",
+    "sunlight": "high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Gymnocalycium (Chin Cactus)",
+    "scientific_name": "Gymnocalycium sp.",
+    "sunlight": "medium-high",
+    "watering_days": 14,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Traveler's Palm",
+    "scientific_name": "Ravenala madagascariensis",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Elephant Ear (Black Magic)",
+    "scientific_name": "Colocasia esculenta 'Black Magic'",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Philodendron Prince of Orange",
+    "scientific_name": "Philodendron 'Prince of Orange'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Philodendron McColley's Finale",
+    "scientific_name": "Philodendron 'McColley's Finale'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea White Fusion",
+    "scientific_name": "Calathea 'White Fusion'",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Calathea Corona",
+    "scientific_name": "Calathea 'Corona'",
+    "sunlight": "low",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aglaonema Red Siam",
+    "scientific_name": "Aglaonema 'Red Siam'",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aglaonema Silver Bay",
+    "scientific_name": "Aglaonema 'Silver Bay'",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Aglaonema Pink Anyamanee",
+    "scientific_name": "Aglaonema 'Pink Anyamanee'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Dragon Scale",
+    "scientific_name": "Alocasia baginda 'Dragon Scale'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Silver Dragon",
+    "scientific_name": "Alocasia baginda 'Silver Dragon'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alocasia Cuprea (Mirror Plant)",
+    "scientific_name": "Alocasia cuprea",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Begonia Maculata (Polka Dot)",
+    "scientific_name": "Begonia maculata",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Begonia Brevirimosa (Jewel Orchid)",
+    "scientific_name": "Begonia brevirimosa",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Jewel Orchid (Ludisia)",
+    "scientific_name": "Ludisia discolor",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Hope",
+    "scientific_name": "Peperomia rotundifolia",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Polybotrya (Raindrop)",
+    "scientific_name": "Peperomia polybotrya",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Rosso",
+    "scientific_name": "Peperomia caperata 'Rosso'",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Metallica",
+    "scientific_name": "Peperomia metallica",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Peperomia Rana Verde",
+    "scientific_name": "Peperomia rotundifolia 'Rana Verde'",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Rubber Tree (Tineke)",
+    "scientific_name": "Ficus elastica 'Tineke'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Rubber Tree (Ruby)",
+    "scientific_name": "Ficus elastica 'Ruby'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Fiddle Leaf Fig (Bambino)",
+    "scientific_name": "Ficus lyrata 'Bambino'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Weeping Fig (Variegated)",
+    "scientific_name": "Ficus benjamina 'Variegata'",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Song of Jamaica",
+    "scientific_name": "Dracaena reflexa",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Janet Craig Dracaena",
+    "scientific_name": "Dracaena fragrans 'Janet Craig'",
+    "sunlight": "low",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pleomele (Malaysian Dracaena)",
+    "scientific_name": "Dracaena reflexa var. angustifolia",
+    "sunlight": "medium",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Chamaedorea Seifrizii (Bamboo Palm)",
+    "scientific_name": "Chamaedorea seifrizii",
+    "sunlight": "low",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Lavender (French)",
+    "scientific_name": "Lavandula stoechas",
+    "sunlight": "high",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Rosemary (Creeping)",
+    "scientific_name": "Salvia rosmarinus 'Prostratus'",
+    "sunlight": "high",
+    "watering_days": 10,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Catmint",
+    "scientific_name": "Nepeta × faassenii",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Black-eyed Susan",
+    "scientific_name": "Rudbeckia hirta",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Coneflower (Echinacea)",
+    "scientific_name": "Echinacea purpurea",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Salvia (Garden)",
+    "scientific_name": "Salvia splendens",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Lantana",
+    "scientific_name": "Lantana camara",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-all",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Vinca (Periwinkle)",
+    "scientific_name": "Catharanthus roseus",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Portulaca (Moss Rose)",
+    "scientific_name": "Portulaca grandiflora",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Cosmos",
+    "scientific_name": "Cosmos bipinnatus",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Snapdragon",
+    "scientific_name": "Antirrhinum majus",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Stock Flower",
+    "scientific_name": "Matthiola incana",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Verbena",
+    "scientific_name": "Verbena × hybrida",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Celosia (Cockscomb)",
+    "scientific_name": "Celosia argentea",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Ti Plant (Hawaiian)",
+    "scientific_name": "Cordyline fruticosa",
+    "sunlight": "medium-high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "New Zealand Flax",
+    "scientific_name": "Phormium tenax",
+    "sunlight": "high",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Heliconia Bihai",
+    "scientific_name": "Heliconia bihai",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Costus (Spiral Ginger)",
+    "scientific_name": "Costus sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Kaempferia (Peacock Ginger)",
+    "scientific_name": "Kaempferia sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Alpinia (Shell Ginger)",
+    "scientific_name": "Alpinia zerumbet",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Curcuma (Hidden Lily)",
+    "scientific_name": "Curcuma sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Glorybower (Bleeding Heart Vine)",
+    "scientific_name": "Clerodendrum thomsoniae",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "toxic-pets",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Shrimp Plant",
+    "scientific_name": "Justicia brandegeeana",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Jacobinia (Brazilian Plume)",
+    "scientific_name": "Justicia carnea",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Crossandra (Firecracker Flower)",
+    "scientific_name": "Crossandra infundibuliformis",
+    "sunlight": "medium-high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Ruellia (Mexican Petunia)",
+    "scientific_name": "Ruellia simplex",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Venus Flytrap",
+    "scientific_name": "Dionaea muscipula",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Pitcher Plant (Sarracenia)",
+    "scientific_name": "Sarracenia sp.",
+    "sunlight": "high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "outdoor"
+  },
+  {
+    "common_name": "Sundew (Drosera)",
+    "scientific_name": "Drosera sp.",
+    "sunlight": "medium-high",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "both"
+  },
+  {
+    "common_name": "Tropical Pitcher (Nepenthes)",
+    "scientific_name": "Nepenthes sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Butterwort (Pinguicula)",
+    "scientific_name": "Pinguicula sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Miniature Orchid",
+    "scientific_name": "Lepanthes sp.",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "difficult",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Moss (Sheet/Cushion)",
+    "scientific_name": "Hypnum sp.",
+    "sunlight": "low",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Baby Tears",
+    "scientific_name": "Soleirolia soleirolii",
+    "sunlight": "medium",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Corsican Mint",
+    "scientific_name": "Mentha requienii",
+    "sunlight": "medium",
+    "watering_days": 3,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Creeping Thyme",
+    "scientific_name": "Thymus serpyllum",
+    "sunlight": "high",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "moderate",
+    "placement": "both"
+  },
+  {
+    "common_name": "Artillery Plant",
+    "scientific_name": "Pilea microphylla",
+    "sunlight": "medium",
+    "watering_days": 5,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pilea Peperomioides (Chinese Money)",
+    "scientific_name": "Pilea peperomioides",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pilea Cadierei (Aluminum Plant)",
+    "scientific_name": "Pilea cadierei",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  },
+  {
+    "common_name": "Pilea Moon Valley",
+    "scientific_name": "Pilea mollis 'Moon Valley'",
+    "sunlight": "medium",
+    "watering_days": 7,
+    "source": "curated",
+    "toxicity": "safe",
+    "care_level": "easy",
+    "placement": "indoor"
+  }
+]
