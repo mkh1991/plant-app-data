@@ -236,6 +236,39 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .btn-id-save{padding:8px 13px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.82rem;font-weight:700;white-space:nowrap;transition:background .15s}
 .btn-id-save:hover{background:var(--green-dark)}
 
+/* ── Plant photo ── */
+.plant-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border);background:var(--green-mist)}
+.btn-photo{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--white);color:var(--text-mid);font-size:.8rem;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-photo:hover{background:var(--green-mist)}
+.photo-add-row{display:flex;align-items:center;gap:10px}
+.photo-add-row img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--border)}
+.card-photo{width:100%;max-height:180px;object-fit:cover;border-radius:var(--radius-sm);border:1.5px solid var(--border);margin-bottom:10px;display:block}
+
+/* ── Fertilize ── */
+:root{--fert:#3949ab;--fert-bg:#eef0fb}
+.fert-tag{font-size:.79rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.fert-green{background:var(--status-green-bg);color:var(--status-green)}
+.fert-yellow{background:var(--status-yellow-bg);color:var(--status-yellow)}
+.fert-red{background:var(--fert-bg);color:var(--fert)}
+.btn-feed{background:var(--fert-bg);color:var(--fert);padding:7px 14px;border-radius:99px;font-size:.79rem;font-weight:700;transition:background .15s,color .15s;box-shadow:0 2px 6px rgba(57,73,171,.18);white-space:nowrap}
+.btn-feed:hover{background:var(--fert);color:#fff}
+
+/* ── Schedule ── */
+.sched-day{margin-bottom:20px}
+.sched-label{font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--text-light);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.sched-count{background:var(--border);border-radius:99px;padding:1px 7px;font-size:.68rem;color:var(--text-mid)}
+.sched-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--white);border-radius:var(--radius-sm);border:1.5px solid var(--border);margin-bottom:6px;box-shadow:var(--shadow)}
+.sched-name{flex:1;font-size:.87rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sched-badge{font-size:.71rem;font-weight:700;padding:2px 7px;border-radius:99px;flex-shrink:0}
+.sched-water{background:var(--status-green-bg);color:var(--status-green)}
+.sched-feed{background:var(--fert-bg);color:var(--fert)}
+.sched-empty{text-align:center;padding:48px 0;color:var(--text-light);font-size:.9rem;font-style:italic}
+.sched-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;background:var(--green-mist)}
+
+/* ── Notification banner ── */
+.notif-banner{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--status-yellow-bg);border:1.5px solid #e8d000;border-radius:var(--radius-sm);margin-bottom:14px;font-size:.82rem;color:var(--status-yellow)}
+.notif-banner button{background:#f0b100;color:#fff;padding:5px 12px;border-radius:99px;font-size:.78rem;font-weight:700;flex-shrink:0}
+
 /* ── Browse tab ── */
 .browse-search-wrap{margin-bottom:10px;position:relative}
 .browse-search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
@@ -288,6 +321,11 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
   .tag-toxic-all{background:#3a0e0e;color:#f07060}
   .tag-care{background:#1c3524;color:#72c890}
   select.field-input option{background:var(--white);color:var(--text)}
+  .fert-red{background:#1a1d3a;color:#8f99e8}
+  .btn-feed{background:#1a1d3a;color:#8f99e8}
+  .sched-feed{background:#1a1d3a;color:#8f99e8}
+  .notif-banner{background:#2a2000;border-color:#6a5000;color:#c4a820}
+  .notif-banner button{background:#c4a820;color:#1a1400}
 }
 
 @media(max-width:400px){
@@ -311,11 +349,16 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
     <nav>
       <button id="tab-dashboard" class="active" onclick="showTab('dashboard')">Dashboard</button>
       <button id="tab-browse" onclick="showTab('browse')">Browse</button>
+      <button id="tab-week" onclick="showTab('week')">📅 Week</button>
       <button id="tab-add" onclick="showTab('add')">+ Add</button>
     </nav>
 
     <!-- Dashboard -->
     <div id="view-dashboard">
+      <div id="notif-banner" class="notif-banner" style="display:none">
+        🔔 Get watering reminders when you open the app
+        <button onclick="requestNotifPermission()">Enable</button>
+      </div>
       <div class="summary-strip" id="summary-strip" style="display:none"></div>
       <div class="filter-bar" id="filter-bar">
         <button class="filter-btn active" onclick="setFilter('all')">All</button>
@@ -331,6 +374,11 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
           Add your first plant
         </button>
       </div>
+    </div>
+
+    <!-- Weekly schedule -->
+    <div id="view-week" style="display:none">
+      <div id="schedule-content"></div>
     </div>
 
     <!-- Browse plants DB -->
@@ -417,6 +465,16 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 
           <hr class="form-divider">
 
+          <div>
+            <label class="field-label">Photo <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <input type="file" id="photo-file-input" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoFile(this)">
+            <div id="photo-preview" class="photo-add-row">
+              <button class="btn-photo" onclick="document.getElementById('photo-file-input').click()">📷 Add photo</button>
+            </div>
+          </div>
+
+          <hr class="form-divider">
+
           <div class="row-2">
             <div>
               <label class="field-label" for="inp-sunlight">Sunlight</label>
@@ -431,6 +489,12 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
               <label class="field-label" for="inp-days">Water every (days)</label>
               <input class="field-input" id="inp-days" type="number" min="1" max="90" value="7">
             </div>
+          </div>
+
+          <div>
+            <label class="field-label" for="inp-fert-days">Feed every (days) <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <input class="field-input" id="inp-fert-days" type="number" min="1" max="365" placeholder="e.g. 28 for monthly">
+            <div class="field-hint">Leave blank to skip fertilizing reminders</div>
           </div>
 
           <div>
@@ -491,6 +555,17 @@ function formatDate(d) {
   if (!d) return '—';
   const dt = new Date(d + 'T00:00:00');
   return dt.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+}
+
+// ── Fertilize status ──────────────────────────────────────────────────────
+function getFertStatus(plant) {
+  if (!plant.fertilize_days) return null;
+  if (!plant.last_fertilized) return { cls:'fert-red', label:'Never fed' };
+  const d = daysBetween(plant.last_fertilized, todayStr());
+  const t = plant.fertilize_days;
+  if (d <= t - 5) return { cls:'fert-green', label:`Fed ${d === 0 ? 'today' : d + 'd ago'}` };
+  if (d <= t)     return { cls:'fert-yellow', label:`Feed in ${t - d}d` };
+  return { cls:'fert-red', label:`Feed overdue ${d - t}d` };
 }
 
 // ── Status calculation ────────────────────────────────────────────────────
@@ -599,17 +674,22 @@ function renderDashboard() {
 
 function renderCard(plant) {
   const status = getStatus(plant);
+  const fertSt = getFertStatus(plant);
   const pct = progressPct(plant);
   const isOpen = window._openCards && window._openCards.has(plant.id);
+  const avatar = plant.photo ? `<img src="${plant.photo}" class="plant-avatar" alt="">` : '';
+  const fertTag = fertSt ? `<span class="fert-tag ${fertSt.cls}">${fertSt.label}</span>` : '';
   return `<div class="plant-card ${status.cls}" id="card-${plant.id}">
     <div class="card-header" onclick="toggleCard('${plant.id}')">
       <div class="card-status-bar"></div>
+      ${avatar}
       <div class="card-info">
         <div class="card-name">${esc(plant.name)}</div>
         ${plant.species ? `<div class="card-species">${esc(plant.species)}</div>` : ''}
         <div class="card-meta">
           ${sunTag(plant.sunlight || 'medium')}
           <span class="water-status">${status.label}</span>
+          ${fertTag}
           ${toxicTag(plant.toxicity)}
           ${careTag(plant.care_level)}
         </div>
@@ -635,6 +715,9 @@ function renderCardBody(plant) {
   const logItems = (plant.log || []).slice().reverse().map(e =>
     `<li><span class="log-date">${formatDate(e.date)}</span><span class="log-note">${esc(e.note||'')}</span></li>`
   ).join('');
+  const fertLogItems = (plant.fertilize_log || []).slice().reverse().map(e =>
+    `<li><span class="log-date">${formatDate(e.date)}</span><span class="log-note">${esc(e.note||'')}</span></li>`
+  ).join('');
 
   const tox = plant.toxicity;
   const care = plant.care_level;
@@ -642,6 +725,7 @@ function renderCardBody(plant) {
   const placeLabel = place === 'indoor' ? '🏠 Indoor' : place === 'outdoor' ? '🌳 Outdoor' : place === 'both' ? '🏠🌳 Both' : '—';
 
   return `
+    ${plant.photo ? `<img src="${plant.photo}" class="card-photo" alt="${esc(plant.name)}">` : ''}
     <div class="card-body-section">
       <div class="info-grid">
         <div class="info-cell"><div class="label">Water every</div><div class="value">${plant.watering_days||7} days</div></div>
@@ -667,6 +751,18 @@ function renderCardBody(plant) {
         <button class="btn-water" onclick="waterNowNote('${plant.id}')">Log</button>
       </div>
     </div>
+    ${plant.fertilize_days ? `
+    <div class="card-body-section">
+      <h4>Fertilizing history</h4>
+      ${fertLogItems ? `<ul class="log-list">${fertLogItems}</ul>` : '<p class="log-empty">No feeding recorded yet.</p>'}
+    </div>
+    <div class="card-body-section">
+      <h4>Log feeding</h4>
+      <div class="note-row">
+        <input type="text" id="fert-note-${plant.id}" class="field-input" placeholder="Optional note…" style="font-size:.85rem;padding:7px 10px">
+        <button class="btn-feed" onclick="fertilizeNow('${plant.id}')">Log</button>
+      </div>
+    </div>` : ''}
     <div class="card-body-section">
       <h4>Edit details</h4>
       <div class="edit-grid">
@@ -689,6 +785,10 @@ function renderCardBody(plant) {
             <label>Water (days)</label>
             <input type="number" id="edit-days-${plant.id}" value="${plant.watering_days||7}" min="1" max="90" class="field-input" style="font-size:.88rem;padding:7px 10px">
           </div>
+        </div>
+        <div class="field-row">
+          <label>Feed every (days)</label>
+          <input type="number" id="edit-fert-${plant.id}" value="${plant.fertilize_days||''}" min="1" max="365" placeholder="e.g. 28" class="field-input" style="font-size:.88rem;padding:7px 10px">
         </div>
         <div class="field-row">
           <label>Last watered</label>
@@ -743,6 +843,8 @@ function saveEdit(id) {
   plant.species = document.getElementById('edit-species-' + id).value.trim();
   plant.sunlight = document.getElementById('edit-sun-' + id).value;
   plant.watering_days = parseInt(document.getElementById('edit-days-' + id).value) || plant.watering_days;
+  const fertVal = parseInt(document.getElementById('edit-fert-' + id).value);
+  plant.fertilize_days = fertVal || null;
   const dateVal = document.getElementById('edit-date-' + id).value;
   if (dateVal) plant.last_watered = dateVal;
   save();
@@ -779,6 +881,7 @@ function addPlant() {
   const days = parseInt(document.getElementById('inp-days').value) || 7;
   const lastWatered = document.getElementById('inp-last-watered').value || todayStr();
 
+  const fertDays = parseInt(document.getElementById('inp-fert-days').value) || null;
   const plant = {
     id: genId(),
     name,
@@ -787,6 +890,10 @@ function addPlant() {
     watering_days: days,
     last_watered: lastWatered,
     log: [{date: lastWatered, note: 'Added to tracker'}],
+    photo: _pendingPhoto || undefined,
+    fertilize_days: fertDays,
+    last_fertilized: null,
+    fertilize_log: [],
     toxicity: _matchedDbEntry ? _matchedDbEntry.toxicity : undefined,
     care_level: _matchedDbEntry ? _matchedDbEntry.care_level : undefined,
     placement: _matchedDbEntry ? _matchedDbEntry.placement : undefined,
@@ -811,10 +918,160 @@ function resetAddForm() {
   _srReset.innerHTML = '';
   _srReset.style.display = 'none';
   _matchedDbEntry = null;
+  document.getElementById('inp-fert-days').value = '';
   document.getElementById('id-content').style.display = 'none';
   document.getElementById('id-setup').style.display = 'none';
   document.getElementById('id-results').innerHTML = '';
   _idResults = [];
+  _pendingPhoto = null;
+  renderPhotoPreview();
+}
+
+// ── Plant photo ──────────────────────────────────────────────────────────
+let _pendingPhoto = null;
+
+function renderPhotoPreview() {
+  const wrap = document.getElementById('photo-preview');
+  if (!wrap) return;
+  wrap.innerHTML = _pendingPhoto
+    ? `<img src="${_pendingPhoto}" alt=""><button class="btn-photo" onclick="clearPendingPhoto()">✕ Remove</button>`
+    : `<button class="btn-photo" onclick="document.getElementById('photo-file-input').click()">📷 Add photo</button>`;
+}
+
+function clearPendingPhoto() { _pendingPhoto = null; renderPhotoPreview(); }
+
+async function handlePhotoFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const blob = await resizeSquare(file, 420);
+  const reader = new FileReader();
+  reader.onload = e => { _pendingPhoto = e.target.result; renderPhotoPreview(); };
+  reader.readAsDataURL(blob);
+  input.value = '';
+}
+
+function resizeSquare(file, size) {
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const s = Math.min(img.width, img.height);
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = size;
+      canvas.getContext('2d').drawImage(
+        img,
+        (img.width - s) / 2, (img.height - s) / 2, s, s,
+        0, 0, size, size
+      );
+      canvas.toBlob(resolve, 'image/jpeg', 0.8);
+    };
+    img.src = url;
+  });
+}
+
+// ── Fertilize actions ─────────────────────────────────────────────────────
+function fertilizeNow(id) {
+  const plant = plants.find(p => p.id === id);
+  if (!plant) return;
+  const note = (document.getElementById('fert-note-' + id) || {}).value?.trim() || '';
+  plant.last_fertilized = todayStr();
+  plant.fertilize_log = plant.fertilize_log || [];
+  plant.fertilize_log.push({ date: todayStr(), note });
+  save();
+  toast('Fed ' + plant.name + '!');
+  renderDashboard();
+}
+
+// ── Schedule view ─────────────────────────────────────────────────────────
+function nextDueDate(plant, type) {
+  if (type === 'water') {
+    if (!plant.last_watered) return todayStr();
+    const d = new Date(plant.last_watered + 'T00:00:00');
+    d.setDate(d.getDate() + (plant.watering_days || 7));
+    const s = d.toISOString().slice(0, 10);
+    return s < todayStr() ? todayStr() : s;
+  }
+  if (type === 'feed') {
+    if (!plant.fertilize_days) return null;
+    if (!plant.last_fertilized) return todayStr();
+    const d = new Date(plant.last_fertilized + 'T00:00:00');
+    d.setDate(d.getDate() + plant.fertilize_days);
+    const s = d.toISOString().slice(0, 10);
+    return s < todayStr() ? todayStr() : s;
+  }
+  return null;
+}
+
+function renderSchedule() {
+  const el = document.getElementById('schedule-content');
+  if (!el) return;
+  if (!plants.length) {
+    el.innerHTML = '<div class="sched-empty">No plants yet — add some to see your schedule.</div>';
+    return;
+  }
+  const today = new Date();
+  const days = Array.from({ length: 14 }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    const ds = d.toISOString().slice(0, 10);
+    const label = i === 0 ? 'Today' : i === 1 ? 'Tomorrow'
+      : d.toLocaleDateString(undefined, { weekday:'long', month:'short', day:'numeric' });
+    return { ds, label, items: [] };
+  });
+
+  for (const plant of plants) {
+    const wDate = nextDueDate(plant, 'water');
+    const day = days.find(d => d.ds === wDate);
+    if (day) day.items.push({ plant, type: 'water' });
+    const fDate = nextDueDate(plant, 'feed');
+    if (fDate) {
+      const fDay = days.find(d => d.ds === fDate);
+      if (fDay) fDay.items.push({ plant, type: 'feed' });
+    }
+  }
+
+  const active = days.filter(d => d.items.length);
+  el.innerHTML = active.length
+    ? active.map(day => `
+      <div class="sched-day">
+        <div class="sched-label">${esc(day.label)} <span class="sched-count">${day.items.length}</span></div>
+        ${day.items.map(({ plant, type }) => `
+          <div class="sched-item">
+            ${plant.photo
+              ? `<img src="${plant.photo}" class="sched-avatar" alt="">`
+              : `<div class="sched-avatar" style="display:flex;align-items:center;justify-content:center;font-size:.9rem">🌿</div>`}
+            <span class="sched-name">${esc(plant.name)}</span>
+            <span class="sched-badge ${type === 'water' ? 'sched-water' : 'sched-feed'}">${type === 'water' ? '💧 Water' : '🌱 Feed'}</span>
+          </div>`).join('')}
+      </div>`).join('')
+    : '<div class="sched-empty">All plants are on track — nothing due in the next 14 days 🎉</div>';
+}
+
+// ── Notifications ─────────────────────────────────────────────────────────
+function initNotifications() {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'default') {
+    document.getElementById('notif-banner').style.display = '';
+  }
+  if (Notification.permission === 'granted') checkAndNotify();
+}
+
+async function requestNotifPermission() {
+  if (!('Notification' in window)) { toast('Notifications not supported in this browser'); return; }
+  const perm = await Notification.requestPermission();
+  document.getElementById('notif-banner').style.display = 'none';
+  if (perm === 'granted') { toast('Notifications enabled!'); checkAndNotify(); }
+}
+
+function checkAndNotify() {
+  if (Notification.permission !== 'granted') return;
+  const overdue = plants.filter(p => getStatus(p).cls === 'status-red');
+  if (!overdue.length) return;
+  const body = overdue.length === 1
+    ? `${overdue[0].name} needs watering`
+    : `${overdue.length} plants need watering`;
+  new Notification('🌿 Plant Tracker', { body, icon: './icon-192.png' });
 }
 
 // ── Plant ID via PlantNet ─────────────────────────────────────────────────
@@ -874,7 +1131,13 @@ async function handleIdFile(input) {
   resultsEl.innerHTML = '';
   _idResults = [];
   try {
-    const resized = await resizeForUpload(file, 1000);
+    const [resized, photoBlob] = await Promise.all([resizeForUpload(file, 1000), resizeSquare(file, 420)]);
+    // Auto-use ID photo as plant photo if none set yet
+    if (!_pendingPhoto) {
+      const reader = new FileReader();
+      reader.onload = e => { _pendingPhoto = e.target.result; renderPhotoPreview(); };
+      reader.readAsDataURL(photoBlob);
+    }
     const fd = new FormData();
     fd.append('images', resized, 'plant.jpg');
     fd.append('organs', _idOrgan);
@@ -1079,17 +1342,17 @@ function isDesktop() { return window.matchMedia('(min-width:720px)').matches; }
 
 function showTab(tab) {
   const desktop = isDesktop();
-  // Left-column views: dashboard and browse always toggle
   document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
   document.getElementById('view-browse').style.display   = tab === 'browse'    ? '' : 'none';
-  // Add form: always visible on desktop, toggled on mobile
+  document.getElementById('view-week').style.display     = tab === 'week'      ? '' : 'none';
   document.getElementById('view-add').style.display = (desktop || tab === 'add') ? '' : 'none';
-  ['dashboard','browse','add'].forEach(t => {
+  ['dashboard','browse','week','add'].forEach(t => {
     const b = document.getElementById('tab-' + t);
     if (b) b.className = t === tab ? 'active' : '';
   });
   if (tab === 'dashboard') renderDashboard();
   if (tab === 'browse') renderBrowse();
+  if (tab === 'week') renderSchedule();
 }
 
 window.addEventListener('resize', () => {
@@ -1118,6 +1381,8 @@ document.getElementById('js-check').style.display = 'none';
 load();
 if (!_storageOk) document.getElementById('storage-warn').style.display = '';
 renderDashboard();
+renderPhotoPreview();
+initNotifications();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
