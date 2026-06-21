@@ -30,10 +30,10 @@
   --status-yellow-bg:#fff9e0;
   --status-red:#c0392b;
   --status-red-bg:#fdecea;
-  --radius:14px;
-  --radius-sm:8px;
-  --shadow:0 2px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 6px 28px rgba(0,0,0,.12);
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 2px 12px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.13);
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overscroll-behavior-y:none}
 a{color:inherit;text-decoration:none}
@@ -41,15 +41,15 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 /* ── Layout ── */
 #app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
-header{background:var(--green-dark);color:#fff;padding:18px 20px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.18)}
-header h1{font-size:1.25rem;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
-header .subtitle{font-size:.78rem;opacity:.75;margin-top:2px}
+header{background:linear-gradient(135deg,#152b1e 0%,var(--green-dark) 60%,#3a6e4e 100%);color:#fff;padding:18px 20px 15px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.22)}
+header h1{font-size:1.28rem;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+header .subtitle{font-size:.76rem;opacity:.68;margin-top:3px;letter-spacing:.01em}
 #main-content{flex:1;padding:16px}
 
 /* ── Nav ── */
-nav{display:flex;gap:8px;margin-bottom:18px}
-nav button{flex:1;padding:9px 0;border-radius:var(--radius-sm);font-size:.88rem;font-weight:600;transition:background .15s,color .15s;background:var(--white);color:var(--text-mid);border:1.5px solid var(--border)}
-nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
+nav{background:var(--white);border-radius:var(--radius-sm);padding:4px;border:1.5px solid var(--border);margin-bottom:18px;display:flex;gap:3px;box-shadow:var(--shadow)}
+nav button{flex:1;padding:8px 0;border-radius:8px;font-size:.88rem;font-weight:600;transition:background .18s,color .18s,box-shadow .18s;background:transparent;color:var(--text-mid);border:none}
+nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(74,140,95,.35)}
 
 /* ── Dashboard ── */
 #dashboard-empty{text-align:center;padding:56px 24px;color:var(--text-light)}
@@ -61,10 +61,10 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 .btn-danger:hover{background:#f8d7d7}
 
 /* ── Plant cards ── */
-.plant-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;border:1.5px solid var(--border);transition:box-shadow .15s}
-.plant-card:hover{box-shadow:var(--shadow-lg)}
-.card-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
-.card-status-bar{width:4px;border-radius:2px;align-self:stretch;flex-shrink:0}
+.plant-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;border:1.5px solid var(--border);transition:box-shadow .2s,transform .15s}
+.plant-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.card-header{display:flex;align-items:flex-start;gap:12px;padding:15px 16px;cursor:pointer;user-select:none}
+.card-status-bar{width:5px;border-radius:3px;align-self:stretch;flex-shrink:0}
 .status-green .card-status-bar{background:var(--status-green)}
 .status-yellow .card-status-bar{background:#f0b100}
 .status-red .card-status-bar{background:var(--status-red)}
@@ -84,10 +84,11 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 .info-cell{background:var(--white);border-radius:var(--radius-sm);padding:8px 10px;border:1px solid var(--border)}
 .info-cell .label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-light);margin-bottom:2px}
 .info-cell .value{font-size:.85rem;font-weight:600;color:var(--text)}
-.card-actions{display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0}
-.btn-water{background:var(--green);color:#fff;padding:8px 14px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:700;transition:background .15s;white-space:nowrap}
-.btn-water:hover{background:var(--green-dark)}
-.btn-expand{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-light);transition:background .15s,transform .2s}
+.card-actions{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+.btn-water{background:var(--green);color:#fff;padding:8px 16px;border-radius:99px;font-size:.82rem;font-weight:700;transition:background .15s,transform .12s,box-shadow .15s;white-space:nowrap;box-shadow:0 2px 7px rgba(74,140,95,.32)}
+.btn-water:hover{background:var(--green-dark);box-shadow:0 3px 10px rgba(74,140,95,.42)}
+.btn-water:active{transform:scale(.95)}
+.btn-expand{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-light);transition:background .15s,transform .25s}
 .btn-expand:hover{background:var(--green-mist)}
 .btn-expand.open{transform:rotate(180deg)}
 
@@ -131,8 +132,8 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 .species-item span{color:var(--text-light);font-size:.8rem;display:block}
 .row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .field-hint{font-size:.75rem;color:var(--text-light);margin-top:3px}
-.btn-submit{width:100%;padding:13px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.95rem;font-weight:700;margin-top:6px;transition:background .15s}
-.btn-submit:hover{background:var(--green-dark)}
+.btn-submit{width:100%;padding:14px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.95rem;font-weight:700;margin-top:6px;transition:background .15s,box-shadow .15s;box-shadow:0 3px 10px rgba(74,140,95,.3)}
+.btn-submit:hover{background:var(--green-dark);box-shadow:0 4px 14px rgba(74,140,95,.4)}
 .form-divider{border:none;border-top:1.5px solid var(--border);margin:4px 0}
 .matched-badge{background:var(--green-pale);color:var(--green-dark);font-size:.75rem;font-weight:600;padding:3px 9px;border-radius:99px;display:inline-block;margin-top:4px}
 
@@ -151,11 +152,65 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 .sun-medium-high{color:#d07010}
 .sun-high{color:#d04010}
 
+/* ── Summary strip ── */
+.summary-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.summary-chip{background:var(--white);border-radius:var(--radius-sm);padding:12px 6px 11px;text-align:center;border:1.5px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.summary-chip::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.chip-red::before{background:var(--status-red)}
+.chip-yellow::before{background:#f0b100}
+.chip-green::before{background:var(--status-green)}
+.summary-chip .num{font-size:1.7rem;font-weight:900;line-height:1;letter-spacing:-.04em}
+.summary-chip .lbl{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);margin-top:3px}
+.chip-red .num{color:var(--status-red)}
+.chip-yellow .num{color:var(--status-yellow)}
+.chip-green .num{color:var(--status-green)}
+
+/* ── Progress bar ── */
+.water-progress{height:4px;border-radius:2px;background:var(--border);margin-top:9px;overflow:hidden}
+.water-progress-fill{height:100%;border-radius:2px;transition:width .4s ease}
+.status-green .water-progress-fill{background:var(--status-green)}
+.status-yellow .water-progress-fill{background:#f0b100}
+.status-red .water-progress-fill{background:var(--status-red)}
+
 /* ── Placement filter ── */
 .filter-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .filter-btn{padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);background:var(--white);color:var(--text-mid);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
 .filter-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
 .tag-placement{font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:99px;background:#e8f0fe;color:#1a56db}
+
+/* ── Dark mode ── */
+@media(prefers-color-scheme:dark){
+  :root{
+    --green-dark:#3d7a52;
+    --green:#4a8c5f;
+    --green-light:#6fa37b;
+    --green-pale:#1c3524;
+    --green-mist:#162a1c;
+    --earth:#b89a72;
+    --earth-light:#a07850;
+    --earth-pale:#2a2018;
+    --cream:#111814;
+    --white:#1c2820;
+    --text:#e4ede6;
+    --text-mid:#9ab8a0;
+    --text-light:#6a8870;
+    --border:#263c2c;
+    --status-green:#52b872;
+    --status-green-bg:#0d2418;
+    --status-yellow:#c4a820;
+    --status-yellow-bg:#242010;
+    --status-red:#e05040;
+    --status-red-bg:#2c1010;
+    --shadow:0 2px 12px rgba(0,0,0,.35);
+    --shadow-lg:0 8px 32px rgba(0,0,0,.5);
+  }
+  header{background:#0e1c12}
+  .tag-placement{background:#1a2a4a;color:#7aadff}
+  .tag-toxic-pets{background:#3a2000;color:#e8a060}
+  .tag-toxic-all{background:#3a0e0e;color:#f07060}
+  .tag-care{background:#1c3524;color:#72c890}
+  select.field-input option{background:var(--white);color:var(--text)}
+}
 
 @media(max-width:400px){
   .card-header{padding:12px}
@@ -182,6 +237,7 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 
     <!-- Dashboard -->
     <div id="view-dashboard">
+      <div class="summary-strip" id="summary-strip" style="display:none"></div>
       <div class="filter-bar" id="filter-bar">
         <button class="filter-btn active" onclick="setFilter('all')">All</button>
         <button class="filter-btn" onclick="setFilter('indoor')">🏠 Indoor</button>
@@ -334,6 +390,27 @@ function placementTag(p) {
   return labels[p] ? `<span class="tag-placement">${labels[p]}</span>` : '';
 }
 
+// ── Progress & summary helpers ────────────────────────────────────────────
+function progressPct(plant) {
+  if (!plant.last_watered) return 100;
+  const daysSince = daysBetween(plant.last_watered, todayStr());
+  return Math.min(Math.round(daysSince / (plant.watering_days || 7) * 100), 100);
+}
+
+function renderSummary() {
+  const el = document.getElementById('summary-strip');
+  if (!el) return;
+  if (!plants.length) { el.style.display = 'none'; return; }
+  const overdue = plants.filter(p => getStatus(p).cls === 'status-red').length;
+  const soon    = plants.filter(p => getStatus(p).cls === 'status-yellow').length;
+  const good    = plants.filter(p => getStatus(p).cls === 'status-green').length;
+  el.style.display = 'grid';
+  el.innerHTML =
+    `<div class="summary-chip chip-red"><div class="num">${overdue}</div><div class="lbl">Overdue</div></div>` +
+    `<div class="summary-chip chip-yellow"><div class="num">${soon}</div><div class="lbl">Due soon</div></div>` +
+    `<div class="summary-chip chip-green"><div class="num">${good}</div><div class="lbl">On track</div></div>`;
+}
+
 // ── Render dashboard ─────────────────────────────────────────────────────
 let _filter = 'all';
 
@@ -346,6 +423,7 @@ function setFilter(f) {
 }
 
 function renderDashboard() {
+  renderSummary();
   const list = document.getElementById('plant-list');
   const empty = document.getElementById('dashboard-empty');
 
@@ -377,6 +455,7 @@ function renderDashboard() {
 
 function renderCard(plant) {
   const status = getStatus(plant);
+  const pct = progressPct(plant);
   const isOpen = window._openCards && window._openCards.has(plant.id);
   return `<div class="plant-card ${status.cls}" id="card-${plant.id}">
     <div class="card-header" onclick="toggleCard('${plant.id}')">
@@ -390,6 +469,7 @@ function renderCard(plant) {
           ${toxicTag(plant.toxicity)}
           ${careTag(plant.care_level)}
         </div>
+        <div class="water-progress"><div class="water-progress-fill" style="width:${pct}%"></div></div>
       </div>
       <div class="card-actions">
         <button class="btn-water" onclick="waterNow(event,'${plant.id}')" title="Water now">
