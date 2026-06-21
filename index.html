@@ -819,10 +819,17 @@ function resetAddForm() {
 
 // ── Plant ID via PlantNet ─────────────────────────────────────────────────
 const ID_KEY_STORAGE = 'plantnet-api-key';
+const ID_PROXY_URL = 'https://plant-id-proxy.mkh1991.workers.dev';
 let _idOrgan = 'leaf';
 let _idResults = [];
 
 function getIdKey() { return localStorage.getItem(ID_KEY_STORAGE) || ''; }
+// Use proxy by default (key hidden server-side); direct API if local key is set.
+function getIdEndpoint(params) {
+  const key = getIdKey();
+  if (key) return `https://my-api.plantnet.org/v2/identify/all?api-key=${encodeURIComponent(key)}&${params}`;
+  return `${ID_PROXY_URL}?${params}`;
+}
 
 function toggleIdSetup() {
   const el = document.getElementById('id-setup');
@@ -840,7 +847,8 @@ function saveIdKey() {
 }
 
 function triggerIdentify() {
-  if (!getIdKey()) {
+  // If no proxy and no local key, show key setup
+  if (!ID_PROXY_URL && !getIdKey()) {
     document.getElementById('id-setup').style.display = '';
     document.getElementById('id-key-input').focus();
     return;
@@ -871,7 +879,7 @@ async function handleIdFile(input) {
     fd.append('images', resized, 'plant.jpg');
     fd.append('organs', _idOrgan);
     const resp = await fetch(
-      `https://my-api.plantnet.org/v2/identify/all?api-key=${encodeURIComponent(getIdKey())}&lang=en&nb-results=5`,
+      getIdEndpoint('lang=en&nb-results=5'),
       { method: 'POST', body: fd }
     );
     if (resp.status === 404) { statusEl.textContent = ''; renderIdResults([]); input.value = ''; return; }
