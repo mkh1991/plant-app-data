@@ -115,8 +115,8 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
 .field-label{font-size:.82rem;font-weight:600;color:var(--text-mid);display:block;margin-bottom:3px}
 .field-input{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font:inherit;font-size:.92rem;background:var(--cream);color:var(--text)}
 .field-input:focus{outline:none;border-color:var(--green);background:var(--white)}
-.species-wrap{position:relative}
-#species-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1.5px solid var(--green);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);z-index:200;max-height:220px;overflow-y:auto;display:none}
+.species-wrap{position:static}
+#species-results{background:var(--white);border:1.5px solid var(--green);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);max-height:220px;overflow-y:auto;display:none;margin-top:4px}
 .species-item{padding:10px 12px;cursor:pointer;font-size:.88rem;border-bottom:1px solid var(--border)}
 .species-item:last-child{border-bottom:none}
 .species-item:hover{background:var(--green-mist)}
@@ -230,7 +230,11 @@ nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
   </div>
 </div>
 
+<div id="js-check" style="background:#c0392b;color:#fff;padding:12px 16px;text-align:center;font-weight:600">⚠️ JavaScript is not running — try a different browser</div>
 <div id="toast"></div>
+<div id="storage-warn" style="display:none;position:fixed;top:0;left:0;right:0;background:#8a4000;color:#fff;font-size:.82rem;padding:10px 16px;text-align:center;z-index:1000;line-height:1.4">
+  ⚠️ Your browser blocked data saving. Plants won't persist after closing — try opening in Chrome or hosting online.
+</div>
 
 <script>
 // ── Plant database (inlined) ──────────────────────────────────────────────
@@ -239,15 +243,21 @@ const PLANTS_DB = [{"common_name":"Radermachera (China Doll)","scientific_name":
 // ── Storage ───────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'plant-tracker-data';
 let plants = [];
+let _storageOk = true;
 
 function load() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     plants = raw ? JSON.parse(raw) : [];
-  } catch(e) { plants = []; }
+  } catch(e) { _storageOk = false; plants = []; }
 }
 function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+    _storageOk = true;
+  } catch(e) {
+    _storageOk = false;
+  }
 }
 function genId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -460,6 +470,7 @@ function deletePlant(id) {
 let _matchedDbEntry = null;
 
 function addPlant() {
+  try {
   const name = document.getElementById('inp-name').value.trim();
   if (!name) { toast('Please enter a plant name'); return; }
   const species = document.getElementById('inp-species').value.trim();
@@ -478,9 +489,11 @@ function addPlant() {
   };
   plants.push(plant);
   save();
+  if (!_storageOk) document.getElementById('storage-warn').style.display = '';
   toast(name + ' added!');
   resetAddForm();
   showTab('dashboard');
+  } catch(err) { toast('Error: ' + err.message); }
 }
 
 function resetAddForm() {
@@ -497,6 +510,7 @@ function resetAddForm() {
 // ── Species autocomplete ──────────────────────────────────────────────────
 const speciesInput = document.getElementById('inp-species');
 const speciesResults = document.getElementById('species-results');
+let _currentHits = [];
 
 function normalise(s) {
   return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -506,13 +520,13 @@ speciesInput.addEventListener('input', function() {
   const q = this.value.trim();
   if (q.length < 2) { speciesResults.style.display = 'none'; return; }
   const qn = normalise(q);
-  const hits = PLANTS_DB.filter(p =>
+  _currentHits = PLANTS_DB.filter(p =>
     normalise(p.common_name).includes(qn) ||
     normalise(p.scientific_name).includes(qn)
   ).slice(0, 8);
-  if (!hits.length) { speciesResults.style.display = 'none'; return; }
-  speciesResults.innerHTML = hits.map((p, i) =>
-    `<div class="species-item" data-idx="${i}" onclick="selectSpecies(${JSON.stringify(p).replace(/</g,'&lt;')})">
+  if (!_currentHits.length) { speciesResults.style.display = 'none'; return; }
+  speciesResults.innerHTML = _currentHits.map((p, i) =>
+    `<div class="species-item" data-idx="${i}">
       <strong>${esc(p.common_name)}</strong>
       <span>${esc(p.scientific_name)}</span>
     </div>`
@@ -520,8 +534,18 @@ speciesInput.addEventListener('input', function() {
   speciesResults.style.display = '';
 });
 
+speciesResults.addEventListener('mousedown', handleSpeciesSelect);
+speciesResults.addEventListener('touchstart', handleSpeciesSelect, {passive: true});
+
+function handleSpeciesSelect(e) {
+  const item = e.target.closest('.species-item');
+  if (!item) return;
+  const idx = parseInt(item.dataset.idx, 10);
+  if (_currentHits[idx]) selectSpecies(_currentHits[idx]);
+}
+
 speciesInput.addEventListener('blur', function() {
-  setTimeout(() => { speciesResults.style.display = 'none'; }, 200);
+  setTimeout(() => { speciesResults.style.display = 'none'; }, 400);
 });
 
 function selectSpecies(p) {
@@ -559,7 +583,9 @@ function esc(s) {
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
+document.getElementById('js-check').style.display = 'none';
 load();
+if (!_storageOk) document.getElementById('storage-warn').style.display = '';
 renderDashboard();
 </script>
 </body>
