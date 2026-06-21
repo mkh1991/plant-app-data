@@ -1,4 +1,4 @@
-const CACHE = 'plant-tracker-v1';
+const CACHE = 'plant-tracker-v2';
 const ASSETS = [
   './',
   './manifest.json',
