@@ -31,8 +31,8 @@
   --status-green-bg:#e8f5eb;
   --status-yellow:#8a6d00;
   --status-yellow-bg:#fff9e0;
-  --status-red:#c0392b;
-  --status-red-bg:#fdecea;
+  --status-red:#c4683a;
+  --status-red-bg:#fdeee4;
   --radius:16px;
   --radius-sm:10px;
   --shadow:0 2px 12px rgba(0,0,0,.07);
@@ -44,9 +44,14 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 /* ── Layout ── */
 #app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
-header{background:linear-gradient(135deg,#152b1e 0%,var(--green-dark) 60%,#3a6e4e 100%);color:#fff;padding:18px 20px 15px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.22)}
-header h1{font-size:1.28rem;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
-header .subtitle{font-size:.76rem;opacity:.68;margin-top:3px;letter-spacing:.01em}
+header{background:#fff;color:#1a2a1e;padding:18px 20px 14px;position:sticky;top:0;z-index:100;border-bottom:1.5px solid #e0e8e0}
+header::after{content:'';position:absolute;inset:0;background:none;pointer-events:none;z-index:0}
+.header-inner{position:relative;z-index:1;display:flex;align-items:center;gap:13px}
+.header-logoblock{width:44px;height:44px;background:linear-gradient(170deg,#4a7c59 55%,#7a5230 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.13)}
+.header-text{flex:1;min-width:0}
+header h1{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:#182818}
+header .subtitle{font-size:.72rem;color:#608060;margin-top:3px}
+.header-pill{background:rgba(45,95,55,.1);border:1px solid rgba(45,95,55,.2);color:#3a6b4a;border-radius:99px;padding:5px 13px;font-size:.75rem;font-weight:600;white-space:nowrap;flex-shrink:0}
 #main-content{flex:1;padding:16px}
 
 /* ── Nav ── */
@@ -60,7 +65,7 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 #dashboard-empty p{font-size:1rem;line-height:1.6;max-width:260px;margin:0 auto 20px}
 .btn-primary{display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-size:.92rem;font-weight:600;transition:background .15s}
 .btn-primary:hover{background:var(--green-dark)}
-.btn-danger{background:var(--status-red-bg);color:var(--status-red);border:1.5px solid #f5c6c2;padding:8px 16px;border-radius:var(--radius-sm);font-size:.85rem;font-weight:600}
+.btn-danger{background:#fdecea;color:#c0392b;border:1.5px solid #f5c6c2;padding:8px 16px;border-radius:var(--radius-sm);font-size:.85rem;font-weight:600}
 .btn-danger:hover{background:#f8d7d7}
 
 /* ── Plant cards ── */
@@ -73,7 +78,7 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .status-red .card-status-bar{background:var(--status-red)}
 .card-info{flex:1;min-width:0}
 .card-name{font-size:1.02rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-species{font-size:.78rem;color:var(--text-light);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-species{font-size:.78rem;color:var(--text-light);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
 .card-meta{display:flex;align-items:center;gap:8px;margin-top:7px;flex-wrap:wrap}
 .sunlight-tag{display:inline-flex;align-items:center;gap:3px;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--earth-pale);color:var(--earth)}
 .water-status{font-size:.8rem;font-weight:600;padding:3px 9px;border-radius:99px}
@@ -91,6 +96,8 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .btn-water{background:var(--green);color:#fff;padding:8px 16px;border-radius:99px;font-size:.82rem;font-weight:700;transition:background .15s,transform .12s,box-shadow .15s;white-space:nowrap;box-shadow:0 2px 7px rgba(74,140,95,.32)}
 .btn-water:hover{background:var(--green-dark);box-shadow:0 3px 10px rgba(74,140,95,.42)}
 .btn-water:active{transform:scale(.95)}
+.status-red .btn-water{background:#c4683a;box-shadow:0 2px 7px rgba(196,104,58,.32)}
+.status-red .btn-water:hover{background:#a85528;box-shadow:0 3px 10px rgba(196,104,58,.42)}
 .btn-expand{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-light);transition:background .15s,transform .25s}
 .btn-expand:hover{background:var(--green-mist)}
 .btn-expand.open{transform:rotate(180deg)}
@@ -106,6 +113,16 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .log-list li:last-child{border-bottom:none}
 .log-date{color:var(--text-mid);font-weight:600;white-space:nowrap}
 .log-note{color:var(--text-light);flex:1;text-align:right}
+
+/* ── Watering guide & alt names ── */
+.card-water-guide{font-size:.82rem;color:var(--text-mid);line-height:1.55}
+.alt-names-section{margin-bottom:14px}
+.alt-names-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.alt-names-header h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);margin:0}
+.lang-select{font-size:.74rem;font-weight:600;color:var(--text-mid);border:1.5px solid var(--border);border-radius:6px;padding:2px 6px;background:var(--white);font-family:inherit;cursor:pointer}
+.lang-select:focus{outline:none;border-color:var(--green)}
+.alt-name-value{font-size:.95rem;font-weight:700;color:var(--text)}
+.alt-name-script{font-size:.82rem;color:var(--text-mid);margin-top:2px}
 
 /* ── Edit form inside card ── */
 .edit-grid{display:grid;gap:10px}
@@ -185,7 +202,7 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 @media (min-width: 720px) {
   #app{max-width:1180px}
   header{padding:16px 36px 14px}
-  header h1{font-size:1.35rem}
+  header h1{font-size:1.38rem}
   #main-content{
     padding:24px 36px;
     display:grid;
@@ -229,6 +246,10 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .id-pct{font-size:.82rem;font-weight:700;color:var(--text-mid)}
 .id-db-badge{font-size:.69rem;font-weight:700;padding:2px 6px;border-radius:99px;background:var(--green-pale);color:var(--green-dark)}
 .id-setup-card{background:var(--earth-pale);border-radius:var(--radius-sm);padding:11px 12px;border:1.5px solid var(--earth-light);margin-bottom:9px}
+.id-setup-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.id-setup-card-header span{font-size:.78rem;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:.05em}
+.id-setup-close{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--text-light);font-size:.9rem;line-height:1;transition:background .15s;flex-shrink:0}
+.id-setup-close:hover{background:var(--border)}
 .id-setup-card p{font-size:.8rem;color:var(--text-mid);margin-bottom:7px;line-height:1.45}
 .id-setup-card a{color:var(--green-dark);text-decoration:underline}
 .id-key-row{display:flex;gap:6px}
@@ -268,6 +289,17 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 /* ── Notification banner ── */
 .notif-banner{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--status-yellow-bg);border:1.5px solid #e8d000;border-radius:var(--radius-sm);margin-bottom:14px;font-size:.82rem;color:var(--status-yellow)}
 .notif-banner button{background:#f0b100;color:#fff;padding:5px 12px;border-radius:99px;font-size:.78rem;font-weight:700;flex-shrink:0}
+
+/* ── About panel ── */
+.about-panel{margin-top:28px;padding:14px 16px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--white);display:flex;flex-direction:column;gap:10px}
+.about-row{display:flex;gap:10px;font-size:.78rem;color:var(--text-mid);line-height:1.5}
+.about-icon{flex-shrink:0;width:18px;text-align:center;margin-top:.05em}
+.about-row a{color:var(--green-dark);text-decoration:underline;text-underline-offset:2px}
+.help-tip{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--border);color:var(--text-mid);font-size:.62rem;font-weight:800;cursor:help;position:relative;vertical-align:middle;margin-left:3px;flex-shrink:0;outline:none}
+.help-tip:focus{background:var(--green-pale);color:var(--green-dark)}
+.help-tooltip{position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--cream);font-size:.73rem;line-height:1.5;padding:9px 11px;border-radius:9px;width:230px;white-space:normal;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .15s;z-index:200}
+.help-tip:hover .help-tooltip,.help-tip:focus .help-tooltip,.help-tip.open .help-tooltip{opacity:1;pointer-events:auto}
+@media(max-width:360px){.help-tooltip{left:0;transform:none}}
 
 /* ── Browse tab ── */
 .browse-search-wrap{margin-bottom:10px;position:relative}
@@ -310,12 +342,17 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
     --status-green-bg:#0d2418;
     --status-yellow:#c4a820;
     --status-yellow-bg:#242010;
-    --status-red:#e05040;
-    --status-red-bg:#2c1010;
+    --status-red:#d4714a;
+    --status-red-bg:#2a1408;
     --shadow:0 2px 12px rgba(0,0,0,.35);
     --shadow-lg:0 8px 32px rgba(0,0,0,.5);
   }
-  header{background:#0e1c12}
+  header{background-color:#0b3321;color:#fff;border-bottom:none}
+  header::after{background:linear-gradient(135deg,rgba(8,28,16,.82) 0%,rgba(16,52,32,.58) 50%,rgba(28,72,46,.45) 100%)}
+  header h1{color:#fff}
+  header .subtitle{color:rgba(255,255,255,.55)}
+  .header-pill{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.14);color:#fff}
+  .header-logoblock{background:linear-gradient(170deg,#4a7c59 55%,#7a5230 100%);box-shadow:0 2px 8px rgba(0,0,0,.3)}
   .tag-placement{background:#1a2a4a;color:#7aadff}
   .tag-toxic-pets{background:#3a2000;color:#e8a060}
   .tag-toxic-all{background:#3a0e0e;color:#f07060}
@@ -338,11 +375,20 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 <body>
 <div id="app">
   <header>
-    <h1>
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 12C5 7 8 4 12 4s7 3 7 8"/><path d="M5 12c-2-1-3-3-2-5a7 7 0 0 1 4-4"/><path d="M19 12c2-1 3-3 2-5a7 7 0 0 0-4-4"/></svg>
-      Plant Tracker
-    </h1>
-    <div class="subtitle">Watering &amp; sunlight care</div>
+    <div class="header-inner">
+      <div class="header-logoblock">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22 L12 9"/><path d="M12 9 C12 9 5 7 3 2 C8 3 11 6 12 9Z"/>
+          <path d="M12 9 C12 9 19 7 21 2 C16 3 13 6 12 9Z"/>
+          <path d="M12 14 C10 13 7 11 6 8"/><path d="M12 14 C14 13 17 11 18 8"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1>Plant Tracker</h1>
+        <div class="subtitle">Watering &amp; sunlight care</div>
+      </div>
+      <div id="header-pill" class="header-pill" style="display:none"></div>
+    </div>
   </header>
 
   <div id="main-content">
@@ -373,6 +419,20 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Add your first plant
         </button>
+      </div>
+      <div class="about-panel">
+        <div class="about-row">
+          <span class="about-icon">🌿</span>
+          <span>Plant database of 337 species with care schedules curated from established horticultural references.<span class="help-tip" tabindex="0">?<span class="help-tooltip">Care values (watering frequency, sunlight, care level) are consensus figures from widely-agreed horticultural knowledge — the same values you'd find across reputable nursery and extension-office sources. They're not per-entry cited or formally multi-agent verified yet. Values are typical averages and may vary by climate, pot size, and season.</span></span></span>
+        </div>
+        <div class="about-row">
+          <span class="about-icon">📷</span>
+          <span>Plant ID powered by <a href="https://plantnet.org" target="_blank" rel="noopener">PlantNet</a> — a citizen science project from INRIA &amp; CIRAD. Up to 500 free IDs/day.<span class="help-tip" tabindex="0">?<span class="help-tooltip">PlantNet uses deep learning (CNNs) trained on millions of crowdsourced botanical images. It returns ranked species matches with confidence scores. Clear, well-lit photos of leaves tend to give the best results.</span></span></span>
+        </div>
+        <div class="about-row">
+          <span class="about-icon">🔒</span>
+          <span>All your data stays on your device. Nothing is sent to any server — your plants are stored in your browser's local storage only.</span>
+        </div>
       </div>
     </div>
 
@@ -418,6 +478,10 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
           <div class="id-panel">
             <div id="id-setup" style="display:none">
               <div class="id-setup-card">
+                <div class="id-setup-card-header">
+                  <span>PlantNet API key</span>
+                  <button class="id-setup-close" onclick="toggleIdSetup()" title="Close">✕</button>
+                </div>
                 <p>Get a free API key at <a href="https://my.plantnet.org/" target="_blank" rel="noopener">my.plantnet.org</a> — 500 IDs/day, free signup.</p>
                 <div class="id-key-row">
                   <input id="id-key-input" class="field-input" type="password" placeholder="Paste your PlantNet API key…" style="font-size:.85rem;padding:8px 10px" autocomplete="off">
@@ -643,6 +707,15 @@ function setFilter(f) {
 
 function renderDashboard() {
   renderSummary();
+  const pill = document.getElementById('header-pill');
+  if (pill) {
+    if (plants.length) {
+      pill.textContent = plants.length + ' plant' + (plants.length === 1 ? '' : 's');
+      pill.style.display = '';
+    } else {
+      pill.style.display = 'none';
+    }
+  }
   const list = document.getElementById('plant-list');
   const empty = document.getElementById('dashboard-empty');
 
@@ -711,6 +784,55 @@ function renderCard(plant) {
   </div>`;
 }
 
+const LANG_OPTIONS = [
+  {code:'en', label:'English'},
+  {code:'hi', label:'हिंदी'},
+  {code:'ta', label:'தமிழ்'},
+  {code:'kn', label:'ಕನ್ನಡ'},
+  {code:'te', label:'తెలుగు'},
+  {code:'ml', label:'മലയാളം'},
+  {code:'bn', label:'বাংলা'},
+  {code:'mr', label:'मराठी'},
+];
+
+function wateringInstruction(plant) {
+  const days = plant.watering_days || 7;
+  if (days >= 21) return 'Water very sparingly — allow soil to dry out completely between waterings. Overwatering is the primary risk. When in doubt, wait another week.';
+  if (days >= 14) return 'Allow the soil to dry out almost completely before watering. When you do water, do it thoroughly until it drains from the bottom, then let it dry again.';
+  if (days >= 7)  return 'Water when the top 1–2 inches of soil feel dry. Water thoroughly until it drains from the bottom, then empty the saucer so roots don\'t sit in water.';
+  if (days >= 4)  return 'Keep soil evenly moist but not waterlogged. Check the top inch of soil — water when it feels just barely dry to the touch.';
+  if (days >= 2)  return 'Keep soil consistently moist — water little and often. Never let the soil dry out fully; wilting can set in quickly.';
+  return 'Keep soil wet at all times or grow in water. Change water weekly if growing hydroponically to prevent stagnation.';
+}
+
+function altNamesHtml(plant) {
+  const names = plant.alt_names;
+  if (!names || Object.keys(names).length === 0) return '';
+  const savedLang = localStorage.getItem('plantLang') || 'en';
+  const opts = LANG_OPTIONS.map(l =>
+    `<option value="${l.code}" ${savedLang===l.code?'selected':''}>${l.label}</option>`
+  ).join('');
+  const name = names[savedLang] || plant.common_name;
+  return `
+    <div class="alt-names-section">
+      <div class="alt-names-header">
+        <h4>Name</h4>
+        <select class="lang-select" onchange="setPlantLang(this.value,'${plant.id}')">${opts}</select>
+      </div>
+      <div id="altname-${plant.id}">
+        <div class="alt-name-value">${esc(name)}</div>
+      </div>
+    </div>`;
+}
+
+function setPlantLang(lang, plantId) {
+  localStorage.setItem('plantLang', lang);
+  const plant = plants.find(p => p.id === plantId);
+  if (!plant || !plant.alt_names) return;
+  const el = document.getElementById('altname-' + plantId);
+  if (el) el.querySelector('.alt-name-value').textContent = plant.alt_names[lang] || plant.common_name;
+}
+
 function renderCardBody(plant) {
   const logItems = (plant.log || []).slice().reverse().map(e =>
     `<li><span class="log-date">${formatDate(e.date)}</span><span class="log-note">${esc(e.note||'')}</span></li>`
@@ -735,6 +857,11 @@ function renderCardBody(plant) {
         <div class="info-cell"><div class="label">Placement</div><div class="value">${placeLabel}</div></div>
       </div>
     </div>
+    <div class="card-body-section">
+      <h4>Watering guide</h4>
+      <p class="card-water-guide">${wateringInstruction(plant)}</p>
+    </div>
+    ${altNamesHtml(plant)}
     <div class="card-body-section">
       <h4>Notes</h4>
       <textarea id="notes-${plant.id}" class="field-input" rows="2" placeholder="Add a note about this plant…" style="font-size:.85rem;padding:7px 10px;resize:vertical;width:100%">${esc(plant.notes||'')}</textarea>
@@ -1396,6 +1523,14 @@ function updateIdVisibility() {
 window.addEventListener('online', updateIdVisibility);
 window.addEventListener('offline', updateIdVisibility);
 updateIdVisibility();
+
+document.querySelectorAll('.help-tip').forEach(tip => {
+  tip.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = tip.classList.toggle('open');
+    if (isOpen) document.addEventListener('click', () => tip.classList.remove('open'), {once:true});
+  });
+});
 </script>
 </body>
 </html>
