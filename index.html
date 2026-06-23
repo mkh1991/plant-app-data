@@ -310,6 +310,10 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 .browse-filters{display:flex;gap:5px;flex-wrap:wrap}
 .browse-filters .filter-btn{font-size:.75rem;padding:4px 11px}
 #browse-count{font-size:.78rem;color:var(--text-light);margin:8px 0 6px;font-weight:600}
+.db-disclaimer{background:#fff8e1;border:1.5px solid #ffe082;border-radius:var(--radius-sm);padding:10px 13px;margin-bottom:12px;display:flex;gap:9px;align-items:flex-start}
+.db-disclaimer-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.db-disclaimer-text{font-size:.75rem;line-height:1.5;color:#5a4000}
+.db-disclaimer-text strong{font-weight:700;color:#7a4f00}
 .browse-card{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--white);border-radius:var(--radius-sm);margin-bottom:7px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:box-shadow .15s}
 .browse-card:hover{box-shadow:var(--shadow-lg)}
 .browse-card-info{flex:1;min-width:0}
@@ -358,6 +362,7 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
   .tag-toxic-all{background:#3a0e0e;color:#f07060}
   .tag-care{background:#1c3524;color:#72c890}
   select.field-input option{background:var(--white);color:var(--text)}
+  .db-disclaimer{background:#2a2000;border-color:#665000;}.db-disclaimer-text{color:#c8a84a}.db-disclaimer-text strong{color:#e8c060}
   .fert-red{background:#1a1d3a;color:#8f99e8}
   .btn-feed{background:#1a1d3a;color:#8f99e8}
   .sched-feed{background:#1a1d3a;color:#8f99e8}
@@ -443,6 +448,12 @@ nav button.active{background:var(--green);color:#fff;box-shadow:0 2px 6px rgba(7
 
     <!-- Browse plants DB -->
     <div id="view-browse" style="display:none">
+      <div class="db-disclaimer">
+        <span class="db-disclaimer-icon">⚠️</span>
+        <div class="db-disclaimer-text">
+          <strong>Verification in progress.</strong> Care data (watering, sunlight, placement) is being independently verified and should not be fully relied upon yet. <strong>Pet &amp; human safety labels are especially unverified</strong> — always confirm with the <a href="https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">ASPCA toxic plant list</a> or your vet before trusting them. Plant ID (photo recognition) is reliable.
+        </div>
+      </div>
       <div class="browse-search-wrap">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input id="browse-search" class="field-input" type="search" placeholder="Search 337 plants…" autocomplete="off" oninput="renderBrowse()">

@@ -1,0 +1,7 @@
+name = "plant-id-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Deploy with:
+#   wrangler secret put PLANTNET_API_KEY
+#   wrangler deploy
