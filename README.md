@@ -1,6 +1,6 @@
 # 🌿 Plant Tracker
 
-A lightweight offline-first PWA for tracking plant watering schedules and care. No accounts, no backend, no dependencies — just a single HTML file.
+A lightweight offline-first PWA (progressive web app) for tracking plant watering schedules and care. No accounts, no backend, no dependencies — just a single HTML file.
 
 **Live:** https://mkh1991.github.io/plant-app-data/
 
